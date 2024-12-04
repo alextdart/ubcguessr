@@ -39,7 +39,7 @@ body {
 }
 
 /* Centering content on the home page */
-.home-container {
+.home-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,26 +48,26 @@ body {
     text-align: center;
 }
 
-.home-container button {
+.home-page button {
     padding: 15px 30px;
     font-size: 18px;
     color: white;
-    background-color: #0055a4;
+    background-color: #8221cf;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.home-container button:hover {
-    background-color: #003f72;
+.home-page button:hover {
+    background-color: #58168d;
 }
 
 /* Image styling for Play page */
 .image-display img {
     max-width: 100%;
     height: auto;
-    border: 3px solid #0055a4;
+    border: 3px solid #8221cf;
     border-radius: 10px;
     margin-bottom: 20px;
 }
@@ -83,7 +83,7 @@ body {
 .play-buttons button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #0055a4;
+    background-color: #8221cf;
     color: white;
     border: none;
     border-radius: 5px;
@@ -92,5 +92,5 @@ body {
 }
 
 .play-buttons button:hover {
-    background-color: #003f72;
+    background-color: #58168d;
 }
