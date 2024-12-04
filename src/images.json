@@ -18,5 +18,41 @@
   {
     "image": "clocktower.jpg",
     "coordinates": { "lat": 49.2670707, "lng": -123.2530035 }
+  },
+  {
+    "image": "larkin_dr.jpg",
+    "coordinates": { "lat": 49.25917, "lng": -123.24882 }
+  },
+  {
+    "image": "oc_courtyard.jpg",
+    "coordinates": { "lat": 49.26058, "lng": -123.25174 }
+  },
+  {
+    "image": "ponderosa_cherries.jpg",
+    "coordinates": { "lat": 49.26367, "lng": -123.25616 }
+  },
+  {
+    "image": "rugby_field.jpg",
+    "coordinates": { "lat": 49.25958, "lng": -123.24128 }
+  },
+  {
+    "image": "sauder_sunset.jpg",
+    "coordinates": { "lat": 49.26577, "lng": -123.25465 }
+  },
+  {
+    "image": "tbird_cres.jpg",
+    "coordinates": { "lat": 49.25951, "lng": -123.24834 }
+  },
+  {
+    "image": "tbird_stadium.jpg",
+    "coordinates": { "lat": 49.25445, "lng": -123.24488 }
+  },
+  {
+    "image": "whale_mouth.jpg",
+    "coordinates": { "lat": 49.26333, "lng": -123.25103 }
+  },
+  {
+    "image": "wreck_sunset.jpg",
+    "coordinates": { "lat": 49.26171, "lng": -123.26176 }
   }
 ]
