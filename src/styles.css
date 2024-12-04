@@ -12,7 +12,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0055a4;
+    background-color: #8221cf;
     padding: 10px 20px;
     color: white;
 }
@@ -24,7 +24,7 @@ body {
 
 .navbar .nav-links {
     display: flex;
-    gap: 15px;
+    gap: 30px;
 }
 
 .navbar .nav-links a {
