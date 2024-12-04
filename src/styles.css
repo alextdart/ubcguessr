@@ -1,0 +1,96 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0055a4;
+    padding: 10px 20px;
+    color: white;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar .nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.navbar .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.navbar .nav-links a:hover {
+    color: #ffdd00;
+}
+
+/* Centering content on the home page */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    text-align: center;
+}
+
+.home-container button {
+    padding: 15px 30px;
+    font-size: 18px;
+    color: white;
+    background-color: #0055a4;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.home-container button:hover {
+    background-color: #003f72;
+}
+
+/* Image styling for Play page */
+.image-display img {
+    max-width: 100%;
+    height: auto;
+    border: 3px solid #0055a4;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Map container styling */
+.map-container {
+    margin: 20px auto;
+    width: 90%;
+    height: 400px;
+}
+
+/* Buttons on Play page */
+.play-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #0055a4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.play-buttons button:hover {
+    background-color: #003f72;
+}
