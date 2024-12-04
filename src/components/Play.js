@@ -4,7 +4,7 @@ import "leaflet/dist/leaflet.css";
 import { getDistance } from "geolib";
 import imageData from "../images.json";
 import L from "leaflet";
-import "../styles.css"; 
+import "../styles.css";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -14,11 +14,11 @@ L.Icon.Default.mergeOptions({
 });
 
 const ImageDisplay = ({ image }) => (
-    <div style={{ textAlign: "center" }}>
+    <div className="image-display">
         <img
             src={process.env.PUBLIC_URL + "/images/" + image}
             alt="Guess this location"
-            style={{ width: "80%", height: "auto", margin: "20px 0" }}
+            className="game-image"
         />
     </div>
 );
@@ -37,20 +37,22 @@ const Map = ({ onPinPlaced, correctLocation, userGuess, showResults }) => {
     };
 
     return (
-        <MapContainer center={[49.2606, -123.246]} zoom={15} style={{ height: "400px", width: "100%" }}>
-            <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            />
-            {position && <Marker position={position} />}
-            {showResults && (
-                <>
-                    <Marker position={correctLocation} />
-                    <Polyline positions={[userGuess, correctLocation]} color="blue" />
-                </>
-            )}
-            <MapClickHandler />
-        </MapContainer>
+        <div className="map-container">
+            <MapContainer center={[49.2606, -123.246]} zoom={15} style={{ height: "100%", width: "100%" }}>
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+                {position && <Marker position={position} />}
+                {showResults && (
+                    <>
+                        <Marker position={correctLocation} />
+                        <Polyline positions={[userGuess, correctLocation]} color="blue" />
+                    </>
+                )}
+                <MapClickHandler />
+            </MapContainer>
+        </div>
     );
 };
 
@@ -64,7 +66,6 @@ const Play = () => {
 
     const handlePinPlaced = (position) => {
         setUserGuess(position);
-        console.log("User's guess:", position);
     };
 
     const handleScoreCalculation = () => {
@@ -72,22 +73,24 @@ const Play = () => {
             alert("Please place a pin before submitting!");
             return;
         }
-
+    
         const correctLocation = imageData[currentIndex].coordinates;
         const distance = getDistance(
             { latitude: correctLocation.lat, longitude: correctLocation.lng },
             { latitude: userGuess.lat, longitude: userGuess.lng }
         );
-
-        const roundScore = Math.max(1000 - distance / 0.7, 0); // adjust divisor for difficulty modification
+    
+        // Calculate the score for this round and round it to the nearest integer
+        const roundScore = Math.round(Math.max(1000 - distance / 0.7, 0));
         setScore((prevScore) => prevScore + roundScore);
         setShowResults(true);
-
-        // small delay so map updates before alert comes up
+    
+        // Small delay so map updates before alert comes up
         setTimeout(() => {
-            alert(`You were ${distance} meters away! You earned ${roundScore.toFixed(0)} points.`);
+            alert(`You were ${distance} meters away! You earned ${roundScore} points.`);
         }, 100); // 100ms delay 
     };
+    
 
     const handleNextRound = () => {
         if (round >= totalRounds) {
@@ -104,25 +107,36 @@ const Play = () => {
     };
 
     return (
-        <div style={{ textAlign: "left", padding: "20px" }}>
-            <h2>Score: {score}</h2>
-            <h3>Round {round}/{totalRounds}</h3>
-            <ImageDisplay image={imageData[currentIndex].image} />
-            <Map
-                onPinPlaced={handlePinPlaced}
-                correctLocation={imageData[currentIndex].coordinates}
-                userGuess={userGuess}
-                showResults={showResults}
-            />
-            {!showResults ? (
-                <button onClick={handleScoreCalculation} style={{ margin: "20px", padding: "10px 20px" }}>
-                    Submit Guess
-                </button>
-            ) : (
-                <button onClick={handleNextRound} style={{ margin: "20px", padding: "10px 20px" }}>
-                    Next Round
-                </button>
-            )}
+        <div className="play-container">
+            {/* Score and Round Info */}
+            <header className="play-header">
+                <h2>Score: {score}</h2>
+                <h3>Round {round}/{totalRounds}</h3>
+            </header>
+
+            {/* Image and Map Side by Side */}
+            <div className="play-main">
+                <ImageDisplay image={imageData[currentIndex].image} />
+                <Map
+                    onPinPlaced={handlePinPlaced}
+                    correctLocation={imageData[currentIndex].coordinates}
+                    userGuess={userGuess}
+                    showResults={showResults}
+                />
+            </div>
+
+            {/* Buttons */}
+            <div className="play-buttons">
+                {!showResults ? (
+                    <button onClick={handleScoreCalculation} className="btn-primary">
+                        Submit Guess
+                    </button>
+                ) : (
+                    <button onClick={handleNextRound} className="btn-secondary">
+                        Next Round
+                    </button>
+                )}
+            </div>
         </div>
     );
 };
