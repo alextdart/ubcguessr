@@ -16,7 +16,7 @@ L.Icon.Default.mergeOptions({
 const ImageDisplay = ({ image }) => (
     <div className="image-display">
         <img
-            src={process.env.PUBLIC_URL + "/images/" + image}
+            src={process.env.PUBLIC_URL + "/images/game/" + image}
             alt="Guess this location"
             className="game-image"
         />
