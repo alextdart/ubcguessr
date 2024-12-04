@@ -1,0 +1,22 @@
+[
+  {
+    "image": "forestry.jpg",
+    "coordinates": { "lat": 49.2605971, "lng": -123.249093 }
+  },
+  {
+    "image": "whalebones.jpg",
+    "coordinates": { "lat": 49.2631565, "lng": -123.2512905 }
+  },
+  {
+    "image": "bookstore.jpg",
+    "coordinates": { "lat": 49.2652991, "lng": -123.2505941 }
+  },
+  {
+    "image": "sauder.jpg",
+    "coordinates": { "lat": 49.2656279, "lng": -123.2536473 }
+  },
+  {
+    "image": "clocktower.jpg",
+    "coordinates": { "lat": 49.2670707, "lng": -123.2530035 }
+  }
+]
