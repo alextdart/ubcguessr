@@ -45,7 +45,7 @@ const Map = ({ onPinPlaced, correctLocation, userGuess, showResults }) => {
             {showResults && (
                 <>
                     <Marker position={correctLocation} />
-                    <Polyline positions={[userGuess, correctLocation]} color="red" />
+                    <Polyline positions={[userGuess, correctLocation]} color="blue" />
                 </>
             )}
             <MapClickHandler />
@@ -67,23 +67,27 @@ const App = () => {
     };
 
     const handleScoreCalculation = () => {
-        if (!userGuess) {
-            alert("Please place a pin before submitting!");
-            return;
-        }
-
-        const correctLocation = imageData[currentIndex].coordinates;
-        const distance = getDistance(
-            { latitude: correctLocation.lat, longitude: correctLocation.lng },
-            { latitude: userGuess.lat, longitude: userGuess.lng }
-        );
-
-        const roundScore = Math.max(1000 - distance / 10, 0); // Example scoring: max 1000, less with distance
-        setScore((prevScore) => prevScore + roundScore);
-        setShowResults(true);
-
-        alert(`You were ${distance} meters away! You earned ${roundScore.toFixed(0)} points.`);
-    };
+      if (!userGuess) {
+          alert("Please place a pin before submitting!");
+          return;
+      }
+  
+      const correctLocation = imageData[currentIndex].coordinates;
+      const distance = getDistance(
+          { latitude: correctLocation.lat, longitude: correctLocation.lng },
+          { latitude: userGuess.lat, longitude: userGuess.lng }
+      );
+  
+      const roundScore = Math.max(1000 - distance / 0.7, 0); // adjust divisor for difficulty modification
+      setScore((prevScore) => prevScore + roundScore);
+      setShowResults(true);
+  
+      // small delay so map updates before alert comes up
+      setTimeout(() => {
+          alert(`You were ${distance} meters away! You earned ${roundScore.toFixed(0)} points.`);
+      }, 100); // 100ms delay 
+  };
+  
 
     const handleNextRound = () => {
         if (round >= totalRounds) {
@@ -101,7 +105,7 @@ const App = () => {
 
     return (
         <div style={{ textAlign: "center", padding: "20px" }}>
-            <h1>UBC Guessr</h1>
+            <h1>UBCguessr</h1>
             <h2>Score: {score}</h2>
             <h3>Round {round}/{totalRounds}</h3>
             <ImageDisplay image={imageData[currentIndex].image} />
