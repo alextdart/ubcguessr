@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Polyline, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { getDistance } from "geolib";
@@ -57,12 +57,19 @@ const Map = ({ onPinPlaced, correctLocation, userGuess, showResults }) => {
 };
 
 const Play = () => {
+    const [shuffledImages, setShuffledImages] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [userGuess, setUserGuess] = useState(null);
     const [score, setScore] = useState(0);
     const [showResults, setShowResults] = useState(false);
     const [round, setRound] = useState(1);
     const totalRounds = 5;
+
+    // Shuffle the images at the start of the game
+    useEffect(() => {
+        const shuffled = [...imageData].sort(() => Math.random() - 0.5); // Fisher-Yates shuffle
+        setShuffledImages(shuffled.slice(0, totalRounds)); // Select only the first `totalRounds` images
+    }, []);
 
     const handlePinPlaced = (position) => {
         setUserGuess(position);
@@ -73,24 +80,21 @@ const Play = () => {
             alert("Please place a pin before submitting!");
             return;
         }
-    
-        const correctLocation = imageData[currentIndex].coordinates;
+
+        const correctLocation = shuffledImages[currentIndex].coordinates;
         const distance = getDistance(
             { latitude: correctLocation.lat, longitude: correctLocation.lng },
             { latitude: userGuess.lat, longitude: userGuess.lng }
         );
-    
-        // Calculate the score for this round and round it to the nearest integer
+
         const roundScore = Math.round(Math.max(1000 - distance / 0.7, 0));
         setScore((prevScore) => prevScore + roundScore);
         setShowResults(true);
-    
-        // Small delay so map updates before alert comes up
+
         setTimeout(() => {
             alert(`You were ${distance} meters away! You earned ${roundScore} points.`);
         }, 100); // 100ms delay 
     };
-    
 
     const handleNextRound = () => {
         if (round >= totalRounds) {
@@ -98,13 +102,23 @@ const Play = () => {
             setRound(1);
             setScore(0);
             setCurrentIndex(0);
+            setUserGuess(null);
+            setShowResults(false);
+
+            // Reshuffle images for the next game
+            const reshuffled = [...imageData].sort(() => Math.random() - 0.5);
+            setShuffledImages(reshuffled.slice(0, totalRounds));
         } else {
             setRound((prevRound) => prevRound + 1);
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % imageData.length);
+            setCurrentIndex((prevIndex) => prevIndex + 1);
             setUserGuess(null);
             setShowResults(false);
         }
     };
+
+    if (shuffledImages.length === 0) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="play-container">
@@ -116,10 +130,10 @@ const Play = () => {
 
             {/* Image and Map Side by Side */}
             <div className="play-main">
-                <ImageDisplay image={imageData[currentIndex].image} />
+                <ImageDisplay image={shuffledImages[currentIndex].image} />
                 <Map
                     onPinPlaced={handlePinPlaced}
-                    correctLocation={imageData[currentIndex].coordinates}
+                    correctLocation={shuffledImages[currentIndex].coordinates}
                     userGuess={userGuess}
                     showResults={showResults}
                 />

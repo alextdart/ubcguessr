@@ -48,6 +48,23 @@ body {
     text-align: center;
 }
 
+.home-page::after {
+    content: "";
+    opacity: 0.3;
+    background: rgb(117, 17, 180) url("../public/images/ubc-large-image.jpg") no-repeat fixed top;
+    background-blend-mode: luminosity;
+    /* also change the blend mode to what suits you, from darken, to other 
+    many options as you deem fit*/
+    background-size: cover;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: -1;
+    height: 100%;
+}
+
 .home-page button {
     padding: 15px 30px;
     font-size: 18px;
