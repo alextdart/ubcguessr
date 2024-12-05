@@ -14,7 +14,7 @@ const About = () => {
             <p><a href="https://forms.gle/VGJkcbq5drSHdeZL6">Google Form Survey Link</a></p>
             <hr></hr>
             <h2>Cheers to all Image Contributors:</h2>
-            <p>Matt Bisset, Emily D., Mikey Lu</p>
+            <p>Matt B., Emily D., Mikey L., Davey R.</p>
         </div>
     );
 };

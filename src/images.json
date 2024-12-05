@@ -62,5 +62,25 @@
   {
     "image": "wm_evos.jpg",
     "coordinates": { "lat": 49.25891127531968, "lng": -123.250979982791 }
+  },
+  {
+    "image": "vball.jpg",
+    "coordinates": { "lat": 49.252758706600126, "lng": -123.23854277685435 }
+  },
+  {
+    "image": "buch_snow.jpg",
+    "coordinates": { "lat": 49.26762215986313, "lng": -123.25462266347168 }
+  },
+  {
+    "image": "tower_sunset.jpg",
+    "coordinates": { "lat": 49.2695203007934, "lng": -123.26281477513199 }
+  },
+  {
+    "image": "wreck_stairs.jpg",
+    "coordinates": { "lat": 49.263243281826696, "lng": -123.25942309049681 }
+  },
+  {
+    "image": "ikb_snow.jpg",
+    "coordinates": { "lat": 49.26698664443532, "lng": -123.25460748650869 }
   }
 ]
