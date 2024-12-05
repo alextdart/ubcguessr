@@ -7,6 +7,23 @@ import imageData from "../images.json";
 import L from "leaflet";
 import "../styles.css";
 
+// Custom icons
+const userIcon = new L.Icon({
+    iconUrl: process.env.PUBLIC_URL + "/images/user-marker.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
+const correctIcon = new L.Icon({
+    iconUrl: process.env.PUBLIC_URL + "/images/correct-marker.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -52,10 +69,10 @@ const Map = ({ onPinPlaced, correctLocation, userGuess, showResults, resetMap })
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 />
-                {position && <Marker position={position} />}
+                {position && <Marker position={position} icon={userIcon} />}
                 {showResults && (
                     <>
-                        <Marker position={correctLocation} />
+                        <Marker position={correctLocation} icon={correctIcon} />
                         <Polyline positions={[userGuess, correctLocation]} color="blue" />
                     </>
                 )}
@@ -73,6 +90,8 @@ const Play = () => {
     const [showResults, setShowResults] = useState(false);
     const [round, setRound] = useState(1);
     const [resetMap, setResetMap] = useState(false);
+    const [guessLocations, setGuessLocations] = useState([]);
+    const [correctLocations, setCorrectLocations] = useState([]);
     const totalRounds = 5;
     const navigate = useNavigate();
 
@@ -106,6 +125,8 @@ const Play = () => {
             roundScore = Math.round(Math.max(995 - distance, 0));
         }
         setScores((prevScores) => [...prevScores, roundScore]);
+        setGuessLocations((prevGuesses) => [...prevGuesses, userGuess]);
+        setCorrectLocations((prevCorrects) => [...prevCorrects, correctLocation]);
         setShowResults(true);
 
         setTimeout(() => {
@@ -119,7 +140,7 @@ const Play = () => {
 
     const handleNextRound = () => {
         if (round >= totalRounds) {
-            navigate("/final-score", { state: { scores } });
+            navigate("/final-score", { state: { scores, guessLocations, correctLocations } });
         } else {
             setRound((prevRound) => prevRound + 1);
             setCurrentIndex((prevIndex) => prevIndex + 1);
@@ -136,16 +157,27 @@ const Play = () => {
 
     return (
         <div className="play-container">
-            {/* Score and Round Info */}
-            <header className="play-header">
-                <h2>Score: {scores.reduce((a, b) => a + b, 0)}</h2>
-                <h3>Round {round}/{totalRounds}</h3>
-            </header>
-
             {/* Image and Map Side by Side */}
             <div className="play-main">
                 <ImageDisplay image={shuffledImages[currentIndex].image} />
                 <div className="map-container-wrapper">
+                    <div className="play-header-buttons">
+                        <header className="play-header">
+                            <h2>Score: {scores.reduce((a, b) => a + b, 0)}</h2>
+                            <h3>Round {round}/{totalRounds}</h3>
+                        </header>
+                        <div className="play-buttons">
+                            {!showResults ? (
+                                <button onClick={handleScoreCalculation} className="btn-primary">
+                                    Submit Guess
+                                </button>
+                            ) : (
+                                <button onClick={handleNextRound} className="btn-secondary">
+                                    {round >= totalRounds ? "Final Score" : "Next Round"}
+                                </button>
+                            )}
+                        </div>
+                    </div>
                     <Map
                         onPinPlaced={handlePinPlaced}
                         correctLocation={shuffledImages[currentIndex].coordinates}
@@ -153,17 +185,6 @@ const Play = () => {
                         showResults={showResults}
                         resetMap={resetMap}
                     />
-                    <div className="play-buttons">
-                        {!showResults ? (
-                            <button onClick={handleScoreCalculation} className="btn-primary">
-                                Submit Guess
-                            </button>
-                        ) : (
-                            <button onClick={handleNextRound} className="btn-secondary">
-                                {round >= totalRounds ? "Final Score" : "Next Round"}
-                            </button>
-                        )}
-                    </div>
                 </div>
             </div>
         </div>
