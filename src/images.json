@@ -1,58 +1,66 @@
 [
   {
-    "image": "forestry.jpg",
-    "coordinates": { "lat": 49.2605971, "lng": -123.249093 }
-  },
-  {
-    "image": "whalebones.jpg",
-    "coordinates": { "lat": 49.2631565, "lng": -123.2512905 }
-  },
-  {
-    "image": "bookstore.jpg",
-    "coordinates": { "lat": 49.2652991, "lng": -123.2505941 }
-  },
-  {
-    "image": "sauder.jpg",
-    "coordinates": { "lat": 49.2656279, "lng": -123.2536473 }
-  },
-  {
-    "image": "clocktower.jpg",
-    "coordinates": { "lat": 49.2670707, "lng": -123.2530035 }
-  },
-  {
     "image": "larkin_dr.jpg",
-    "coordinates": { "lat": 49.25917, "lng": -123.24882 }
+    "coordinates": { "lat": 49.25905434557639, "lng": -123.24874898890803 }
   },
   {
     "image": "oc_courtyard.jpg",
-    "coordinates": { "lat": 49.26058, "lng": -123.25174 }
+    "coordinates": { "lat": 49.26066370240188, "lng": -123.25169701374965 }
   },
   {
     "image": "ponderosa_cherries.jpg",
-    "coordinates": { "lat": 49.26367, "lng": -123.25616 }
+    "coordinates": { "lat": 49.26363597078426, "lng": -123.25631166921299 }
   },
   {
     "image": "rugby_field.jpg",
-    "coordinates": { "lat": 49.25958, "lng": -123.24128 }
+    "coordinates": { "lat": 49.259530534570956, "lng": -123.24119460918378 }
   },
   {
     "image": "sauder_sunset.jpg",
-    "coordinates": { "lat": 49.26577, "lng": -123.25465 }
+    "coordinates": { "lat": 49.265774072174416, "lng": -123.2545972336566 }
   },
   {
     "image": "tbird_cres.jpg",
-    "coordinates": { "lat": 49.25951, "lng": -123.24834 }
+    "coordinates": { "lat": 49.25911282866201, "lng": -123.24811129652223 }
   },
   {
     "image": "tbird_stadium.jpg",
-    "coordinates": { "lat": 49.25445, "lng": -123.24488 }
+    "coordinates": { "lat": 49.2543476747873, "lng": -123.24418698358919 }
   },
   {
     "image": "whale_mouth.jpg",
-    "coordinates": { "lat": 49.26333, "lng": -123.25103 }
+    "coordinates": { "lat": 49.263313021209754, "lng": -123.2510154081268 }
   },
   {
     "image": "wreck_sunset.jpg",
-    "coordinates": { "lat": 49.26171, "lng": -123.26176 }
+    "coordinates": { "lat": 49.26176963762731, "lng": -123.26218686978474 }
+  },
+  {
+    "image": "snow_flag.jpg",
+    "coordinates": { "lat": 49.267071332346575, "lng": -123.24929727500378 }
+  },
+  {
+    "image": "nitobe.jpg",
+    "coordinates": { "lat": 49.26648399163212, "lng": -123.25950134681273 }
+  },
+  {
+    "image": "mm_fog.jpg",
+    "coordinates": { "lat": 49.265150873775916, "lng": -123.25321508525676 }
+  },
+  {
+    "image": "chem_fog.jpg",
+    "coordinates": { "lat": 49.26516965207543, "lng": -123.2524822080989 }
+  },
+  {
+    "image": "wm_fog.jpg",
+    "coordinates": { "lat": 49.26152562478228, "lng": -123.25343642912455 }
+  },
+  {
+    "image": "gal_fog.jpg",
+    "coordinates": { "lat": 49.26684433078153, "lng": -123.2504576303511 }
+  },
+  {
+    "image": "wm_evos.jpg",
+    "coordinates": { "lat": 49.25891127531968, "lng": -123.250979982791 }
   }
 ]
