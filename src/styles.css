@@ -41,10 +41,23 @@ body {
     text-decoration: none;
     font-size: 18px;
     transition: color 0.3s;
+    padding: 10px 20px;
+    background-color: #8221cf;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .navbar .nav-links a:hover {
-    color: #ffdd00;
+    background-color: #58168d;
+    color: #ffdd00; /* Optional: Change text color on hover */
+}
+
+.navbar .menu-icon {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .home-page {
@@ -125,7 +138,6 @@ body {
     height: 600px;
     width: 100%; 
     max-width: 100%;
-    border: 3px solid #8221cf;
     border-radius: 10px;
     text-align: center;
     overflow: hidden;
@@ -172,21 +184,112 @@ body {
 }
 
 .final-score-container {
+    position: relative;
     padding: 20px;
+    text-align: left;
+    color: #333;
+}
+
+.final-score-background {
+    content: "";
+    opacity: 0.3;
+    background: rgb(117, 17, 180) url("../public/images/ubc-background.jpg") no-repeat fixed top;
+    background-blend-mode: luminosity;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+}
+
+.final-score-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.final-score-text {
+    flex: 1;
+    padding-right: 20px;
+    text-align: right;
+    position: relative;
+    height: 600px; /* Ensure the same height as the map */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.final-score-text .final-score-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+}
+
+.final-score-text ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+}
+
+.final-score-text ul li {
+    text-align: right; /* Align text to the right */
+}
+
+.final-score-map {
+    flex: 1;
+    background-color: #8724d8;
+    border-radius: 10px;
+    border: none; /* Remove border */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+.btn-secondary {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #8221cf;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: flex-end; /* Align button to the right */
+}
+
+.btn-secondary:hover {
+    background-color: #58168d;
 }
 
 @media (max-width: 768px) {
     .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%; 
+        flex-direction: row; /* Change to row to keep logo and menu icon side by side */
+        justify-content: space-between; /* Ensure space between logo and menu icon */
+        align-items: center; /* Center align items vertically */
     }
 
     .navbar .nav-links {
         flex-direction: column;
         gap: 10px;
         width: 100%;
-        align-items: flex-start;
+        align-items: flex-end; /* Align links to the right */
+        display: none; /* Hide links by default */
+    }
+
+    .navbar .nav-links.active {
+        display: flex; /* Show links when active */
+    }
+
+    .navbar .menu-icon {
+        display: block; /* Show menu icon on mobile */
+        align-self: center; /* Center align menu icon vertically */
     }
 
     .play-main {
@@ -206,6 +309,7 @@ body {
     .map-container {
         width: 100%; 
         max-width: 100%;
+        height: 400px; /* Ensure the map has a height on mobile */
     }
 
     .image-display {
@@ -230,6 +334,27 @@ body {
         text-align: center;
         order: -1; 
         margin-bottom: 20px; 
+    }
+
+    .final-score-content {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center;
+    }
+
+    .final-score-text {
+        height: auto; /* Adjust height for stacking */
+        padding-right: 0;
+        text-align: center; /* Center text */
+        width: 90%; /* Make the text box wider */
+    }
+
+    .final-score-text ul li {
+        text-align: center; /* Center list items */
+    }
+
+    .final-score-map {
+        width: 90%; /* Make the map box the same width as the text box */
+        height: 400px; /* Ensure the map has a height on mobile */
     }
 }
 
