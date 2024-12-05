@@ -6,6 +6,7 @@ import Play from "./components/Play";
 import About from "./components/About";
 import FinalScore from "./components/FinalScore"; // Import the new component
 import "./styles.css";
+import { Analytics } from "@vercel/analytics/react"
 
 
 const App = () => {
