@@ -2,7 +2,7 @@
 
 This is a UBC-campus based location guessing game inspired by Geoguessr and Timeguessr I made to practice JavaScript and learn React.
 
-Try it out at [UBCguessr on Vercel](https://ubcguessr.vercel.app/)
+Try it out at [UBCguessr on Vercel](https://ubcguessr.vercel.app/).
 
 ## Created with Create React App
 
