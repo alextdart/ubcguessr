@@ -131,25 +131,25 @@ const Play = () => {
             {/* Image and Map Side by Side */}
             <div className="play-main">
                 <ImageDisplay image={shuffledImages[currentIndex].image} />
-                <Map
-                    onPinPlaced={handlePinPlaced}
-                    correctLocation={shuffledImages[currentIndex].coordinates}
-                    userGuess={userGuess}
-                    showResults={showResults}
-                />
-            </div>
-
-            {/* Buttons */}
-            <div className="play-buttons">
-                {!showResults ? (
-                    <button onClick={handleScoreCalculation} className="btn-primary">
-                        Submit Guess
-                    </button>
-                ) : (
-                    <button onClick={handleNextRound} className="btn-secondary">
-                        Next Round
-                    </button>
-                )}
+                <div className="map-container-wrapper">
+                    <Map
+                        onPinPlaced={handlePinPlaced}
+                        correctLocation={shuffledImages[currentIndex].coordinates}
+                        userGuess={userGuess}
+                        showResults={showResults}
+                    />
+                    <div className="play-buttons">
+                        {!showResults ? (
+                            <button onClick={handleScoreCalculation} className="btn-primary">
+                                Submit Guess
+                            </button>
+                        ) : (
+                            <button onClick={handleNextRound} className="btn-secondary">
+                                Next Round
+                            </button>
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
     );
