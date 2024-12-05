@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Polyline, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { getDistance } from "geolib";
@@ -23,8 +23,16 @@ const ImageDisplay = ({ image }) => (
     </div>
 );
 
-const Map = ({ onPinPlaced, correctLocation, userGuess, showResults }) => {
+const Map = ({ onPinPlaced, correctLocation, userGuess, showResults, resetMap }) => {
     const [position, setPosition] = useState(null);
+    const mapRef = useRef();
+
+    useEffect(() => {
+        if (resetMap && mapRef.current) {
+            setPosition(null);
+            mapRef.current.setView([49.2606, -123.246], 15);
+        }
+    }, [resetMap]);
 
     const MapClickHandler = () => {
         useMapEvents({
@@ -38,7 +46,7 @@ const Map = ({ onPinPlaced, correctLocation, userGuess, showResults }) => {
 
     return (
         <div className="map-container">
-            <MapContainer center={[49.2606, -123.246]} zoom={15} style={{ height: "100%", width: "100%" }}>
+            <MapContainer ref={mapRef} center={[49.2606, -123.246]} zoom={15} style={{ height: "100%", width: "100%" }}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -63,6 +71,7 @@ const Play = () => {
     const [score, setScore] = useState(0);
     const [showResults, setShowResults] = useState(false);
     const [round, setRound] = useState(1);
+    const [resetMap, setResetMap] = useState(false);
     const totalRounds = 5;
 
     // Shuffle the images at the start of the game
@@ -114,6 +123,8 @@ const Play = () => {
             setUserGuess(null);
             setShowResults(false);
         }
+        setResetMap(true);
+        setTimeout(() => setResetMap(false), 0); // Reset the map after state update
     };
 
     if (shuffledImages.length === 0) {
@@ -137,6 +148,7 @@ const Play = () => {
                         correctLocation={shuffledImages[currentIndex].coordinates}
                         userGuess={userGuess}
                         showResults={showResults}
+                        resetMap={resetMap}
                     />
                     <div className="play-buttons">
                         {!showResults ? (
