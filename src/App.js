@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Play from "./components/Play";
 import About from "./components/About";
+import FinalScore from "./components/FinalScore"; // Import the new component
 import "./styles.css";
 
 
@@ -15,6 +16,7 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/play" element={<Play />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/final-score" element={<FinalScore />} /> {/* Add the new route */}
             </Routes>
         </Router>
     );
