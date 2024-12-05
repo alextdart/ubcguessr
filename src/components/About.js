@@ -12,6 +12,9 @@ const About = () => {
             <h2>Do you have images you want to submit to this game?</h2>
             <p>As long as your images have location data attached, or you can provide me the lat/long coordinates otherwise, feel free to submit them to the link below.</p>
             <p><a href="https://forms.gle/VGJkcbq5drSHdeZL6">Google Form Survey Link</a></p>
+            <hr></hr>
+            <h2>Cheers to all Image Contributors:</h2>
+            <p>Matt Bisset, Emily D., Mikey Lu</p>
         </div>
     );
 };
