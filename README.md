@@ -1,4 +1,4 @@
-# UBCGuessr
+# UBCguessr
 
 This is a UBC-campus based location guessing game inspired by Geoguessr and Timeguessr I made to practice JavaScript and learn React.
 

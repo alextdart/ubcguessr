@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Polyline, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { getDistance } from "geolib";
@@ -23,8 +24,16 @@ const ImageDisplay = ({ image }) => (
     </div>
 );
 
-const Map = ({ onPinPlaced, correctLocation, userGuess, showResults }) => {
+const Map = ({ onPinPlaced, correctLocation, userGuess, showResults, resetMap }) => {
     const [position, setPosition] = useState(null);
+    const mapRef = useRef();
+
+    useEffect(() => {
+        if (resetMap && mapRef.current) {
+            setPosition(null);
+            mapRef.current.setView([49.2606, -123.246], 15);
+        }
+    }, [resetMap]);
 
     const MapClickHandler = () => {
         useMapEvents({
@@ -38,7 +47,7 @@ const Map = ({ onPinPlaced, correctLocation, userGuess, showResults }) => {
 
     return (
         <div className="map-container">
-            <MapContainer center={[49.2606, -123.246]} zoom={15} style={{ height: "100%", width: "100%" }}>
+            <MapContainer ref={mapRef} center={[49.2606, -123.246]} zoom={15} style={{ height: "100%", width: "100%" }}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -60,10 +69,12 @@ const Play = () => {
     const [shuffledImages, setShuffledImages] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [userGuess, setUserGuess] = useState(null);
-    const [score, setScore] = useState(0);
+    const [scores, setScores] = useState([]);
     const [showResults, setShowResults] = useState(false);
     const [round, setRound] = useState(1);
+    const [resetMap, setResetMap] = useState(false);
     const totalRounds = 5;
+    const navigate = useNavigate();
 
     // Shuffle the images at the start of the game
     useEffect(() => {
@@ -87,8 +98,8 @@ const Play = () => {
             { latitude: userGuess.lat, longitude: userGuess.lng }
         );
 
-        const roundScore = Math.round(Math.max(1000 - distance / 0.7, 0));
-        setScore((prevScore) => prevScore + roundScore);
+        const roundScore = Math.round(Math.max(1000 - distance, 0));
+        setScores((prevScores) => [...prevScores, roundScore]);
         setShowResults(true);
 
         setTimeout(() => {
@@ -98,21 +109,14 @@ const Play = () => {
 
     const handleNextRound = () => {
         if (round >= totalRounds) {
-            alert(`Game Over! Your final score is ${score}.`);
-            setRound(1);
-            setScore(0);
-            setCurrentIndex(0);
-            setUserGuess(null);
-            setShowResults(false);
-
-            // Reshuffle images for the next game
-            const reshuffled = [...imageData].sort(() => Math.random() - 0.5);
-            setShuffledImages(reshuffled.slice(0, totalRounds));
+            navigate("/final-score", { state: { scores } });
         } else {
             setRound((prevRound) => prevRound + 1);
             setCurrentIndex((prevIndex) => prevIndex + 1);
             setUserGuess(null);
             setShowResults(false);
+            setResetMap(true);
+            setTimeout(() => setResetMap(false), 0); // Reset the map after state update
         }
     };
 
@@ -124,32 +128,33 @@ const Play = () => {
         <div className="play-container">
             {/* Score and Round Info */}
             <header className="play-header">
-                <h2>Score: {score}</h2>
+                <h2>Score: {scores.reduce((a, b) => a + b, 0)}</h2>
                 <h3>Round {round}/{totalRounds}</h3>
             </header>
 
             {/* Image and Map Side by Side */}
             <div className="play-main">
                 <ImageDisplay image={shuffledImages[currentIndex].image} />
-                <Map
-                    onPinPlaced={handlePinPlaced}
-                    correctLocation={shuffledImages[currentIndex].coordinates}
-                    userGuess={userGuess}
-                    showResults={showResults}
-                />
-            </div>
-
-            {/* Buttons */}
-            <div className="play-buttons">
-                {!showResults ? (
-                    <button onClick={handleScoreCalculation} className="btn-primary">
-                        Submit Guess
-                    </button>
-                ) : (
-                    <button onClick={handleNextRound} className="btn-secondary">
-                        Next Round
-                    </button>
-                )}
+                <div className="map-container-wrapper">
+                    <Map
+                        onPinPlaced={handlePinPlaced}
+                        correctLocation={shuffledImages[currentIndex].coordinates}
+                        userGuess={userGuess}
+                        showResults={showResults}
+                        resetMap={resetMap}
+                    />
+                    <div className="play-buttons">
+                        {!showResults ? (
+                            <button onClick={handleScoreCalculation} className="btn-primary">
+                                Submit Guess
+                            </button>
+                        ) : (
+                            <button onClick={handleNextRound} className="btn-secondary">
+                                {round >= totalRounds ? "Final Score" : "Next Round"}
+                            </button>
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
     );
