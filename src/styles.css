@@ -141,3 +141,7 @@ body {
 .play-buttons button:hover {
     background-color: #58168d;
 }
+
+.about-page {
+    padding: 20px;
+}
