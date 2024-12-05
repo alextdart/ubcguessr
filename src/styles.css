@@ -51,7 +51,7 @@ body {
 
 .navbar .nav-links a:hover {
     background-color: #58168d;
-    color: #ffdd00; /* Optional: Change text color on hover */
+    color: #ffdd00; 
 }
 
 .navbar .menu-icon {
@@ -116,7 +116,7 @@ body {
     width: 100%; 
     margin: 0 auto;
     justify-content: center; 
-    align-items: flex-start; 
+    align-items: stretch;
 }
 
 .map-container-wrapper {
@@ -128,10 +128,7 @@ body {
     top: 0;
     align-items: center;
     margin-right: 30px;
-}
-
-.map-container-wrapper .play-header {
-    text-align: left;
+    height: 100%; 
 }
 
 .map-container {
@@ -148,6 +145,26 @@ body {
     flex: 1;
     text-align: center;
     padding-top: 40px; 
+    position: relative; 
+    min-height: 100vh; 
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+    overflow: hidden;
+}
+
+.image-display::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(117, 17, 180) url("../public/images/ubc-background.jpg") no-repeat center center;
+    background-blend-mode: luminosity;
+    background-size: cover;
+    filter: blur(8px); 
+    z-index: -1; 
 }
 
 .image-display img {
@@ -157,6 +174,9 @@ body {
     border: 3px solid #8221cf;
     border-radius: 10px;
     margin: 20px;
+    position: relative; 
+    z-index: 1; 
+    margin-top: 40px; 
 }
 
 .play-buttons {
@@ -217,7 +237,7 @@ body {
     padding-right: 20px;
     text-align: right;
     position: relative;
-    height: 600px; /* Ensure the same height as the map */
+    height: 600px; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -235,21 +255,21 @@ body {
 }
 
 .final-score-text ul {
-    list-style: none; /* Remove bullet points */
+    list-style: none; 
     padding: 0;
 }
 
 .final-score-text ul li {
-    text-align: right; /* Align text to the right */
+    text-align: right; 
 }
 
 .final-score-map {
     flex: 1;
     background-color: #8724d8;
     border-radius: 10px;
-    border: none; /* Remove border */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margin */
+    border: none; 
+    padding: 0; 
+    margin: 0; 
 }
 
 .btn-secondary {
@@ -261,7 +281,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    align-self: flex-end; /* Align button to the right */
+    align-self: flex-end;
 }
 
 .btn-secondary:hover {
@@ -270,26 +290,26 @@ body {
 
 @media (max-width: 768px) {
     .navbar {
-        flex-direction: row; /* Change to row to keep logo and menu icon side by side */
-        justify-content: space-between; /* Ensure space between logo and menu icon */
-        align-items: center; /* Center align items vertically */
+        flex-direction: row; 
+        justify-content: space-between; 
+        align-items: center; 
     }
 
     .navbar .nav-links {
         flex-direction: column;
         gap: 10px;
         width: 100%;
-        align-items: flex-end; /* Align links to the right */
-        display: none; /* Hide links by default */
+        align-items: flex-end; 
+        display: none; 
     }
 
     .navbar .nav-links.active {
-        display: flex; /* Show links when active */
+        display: flex;
     }
 
     .navbar .menu-icon {
-        display: block; /* Show menu icon on mobile */
-        align-self: center; /* Center align menu icon vertically */
+        display: block; 
+        align-self: center; 
     }
 
     .play-main {
@@ -309,7 +329,7 @@ body {
     .map-container {
         width: 100%; 
         max-width: 100%;
-        height: 400px; /* Ensure the map has a height on mobile */
+        height: 400px; 
     }
 
     .image-display {
@@ -317,6 +337,8 @@ body {
         text-align: center;
         padding: 0 20px; 
         box-sizing: border-box; 
+        min-height: auto; 
+        height: auto; 
     }
 
     .play-header-buttons {
@@ -337,24 +359,24 @@ body {
     }
 
     .final-score-content {
-        flex-direction: column; /* Stack elements vertically */
+        flex-direction: column; 
         align-items: center;
     }
 
     .final-score-text {
-        height: auto; /* Adjust height for stacking */
+        height: auto; 
         padding-right: 0;
-        text-align: center; /* Center text */
-        width: 90%; /* Make the text box wider */
+        text-align: center;
+        width: 90%; 
     }
 
     .final-score-text ul li {
-        text-align: center; /* Center list items */
+        text-align: center; 
     }
 
     .final-score-map {
-        width: 90%; /* Make the map box the same width as the text box */
-        height: 400px; /* Ensure the map has a height on mobile */
+        width: 90%; 
+        height: 400px; 
     }
 }
 
