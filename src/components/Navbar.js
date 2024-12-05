@@ -11,7 +11,7 @@ const Navbar = () => {
 
     return (
         <nav className="navbar">
-            <div className="logo">UBCGuessr</div>
+            <div className="logo">UBCguessr</div>
             <div className={`nav-links ${menuOpen ? "active" : ""}`}>
                 <Link to="/" onClick={toggleMenu}>Home</Link>
                 <Link to="/play" onClick={toggleMenu}>New Game</Link>
