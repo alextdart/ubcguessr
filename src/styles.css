@@ -190,5 +190,7 @@ body {
     .play-buttons {
         width: 100%;
         text-align: center;
+        order: -1; /* Move the buttons to the top */
+        margin-bottom: 20px; /* Add margin to separate from the map */
     }
 }
