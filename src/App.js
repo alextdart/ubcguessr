@@ -19,6 +19,7 @@ const App = () => {
                 <Route path="/about" element={<About />} />
                 <Route path="/final-score" element={<FinalScore />} /> {/* Add the new route */}
             </Routes>
+            <Analytics/>
         </Router>
     );
 };
