@@ -136,16 +136,27 @@ const Play = () => {
 
     return (
         <div className="play-container">
-            {/* Score and Round Info */}
-            <header className="play-header">
-                <h2>Score: {scores.reduce((a, b) => a + b, 0)}</h2>
-                <h3>Round {round}/{totalRounds}</h3>
-            </header>
-
             {/* Image and Map Side by Side */}
             <div className="play-main">
                 <ImageDisplay image={shuffledImages[currentIndex].image} />
                 <div className="map-container-wrapper">
+                    <div className="play-header-buttons">
+                        <header className="play-header">
+                            <h2>Score: {scores.reduce((a, b) => a + b, 0)}</h2>
+                            <h3>Round {round}/{totalRounds}</h3>
+                        </header>
+                        <div className="play-buttons">
+                            {!showResults ? (
+                                <button onClick={handleScoreCalculation} className="btn-primary">
+                                    Submit Guess
+                                </button>
+                            ) : (
+                                <button onClick={handleNextRound} className="btn-secondary">
+                                    {round >= totalRounds ? "Final Score" : "Next Round"}
+                                </button>
+                            )}
+                        </div>
+                    </div>
                     <Map
                         onPinPlaced={handlePinPlaced}
                         correctLocation={shuffledImages[currentIndex].coordinates}
@@ -153,17 +164,6 @@ const Play = () => {
                         showResults={showResults}
                         resetMap={resetMap}
                     />
-                    <div className="play-buttons">
-                        {!showResults ? (
-                            <button onClick={handleScoreCalculation} className="btn-primary">
-                                Submit Guess
-                            </button>
-                        ) : (
-                            <button onClick={handleNextRound} className="btn-secondary">
-                                {round >= totalRounds ? "Final Score" : "Next Round"}
-                            </button>
-                        )}
-                    </div>
                 </div>
             </div>
         </div>

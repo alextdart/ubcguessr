@@ -23,6 +23,7 @@ body {
     color: white;
     width: 100%; 
     box-sizing: border-box; 
+    overflow: hidden; 
 }
 
 .navbar .logo {
@@ -86,7 +87,8 @@ body {
 }
 
 .play-header {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     text-align: center;
 }
 
@@ -100,7 +102,7 @@ body {
     gap: 20px;
     width: 100%; 
     margin: 0 auto;
-    justify-content: space-between;
+    justify-content: center; 
     align-items: flex-start; 
 }
 
@@ -109,33 +111,45 @@ body {
     flex-direction: column;
     flex: 1;
     position: sticky;
+    text-align: center;
     top: 0;
+    align-items: center;
+    margin-right: 30px;
+}
+
+.map-container-wrapper .play-header {
+    text-align: left;
 }
 
 .map-container {
-    height: 500px;
+    height: 600px;
+    width: 100%; 
+    max-width: 100%;
     border: 3px solid #8221cf;
     border-radius: 10px;
+    text-align: center;
     overflow: hidden;
-    margin-bottom: 20px;
+    box-sizing: border-box;
 }
 
 .image-display {
     flex: 1;
     text-align: center;
+    padding-top: 40px; 
 }
 
 .image-display img {
-    max-width: 100%;
+    max-width: 80%;
+    max-height: 800px;
     height: auto;
     border: 3px solid #8221cf;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin: 20px;
 }
 
 .play-buttons {
     margin-top: 20px;
-    text-align: center;
+    text-align: right; 
 }
 
 .play-buttons button {
@@ -165,6 +179,7 @@ body {
     .navbar {
         flex-direction: column;
         align-items: flex-start;
+        width: 100%; 
     }
 
     .navbar .nav-links {
@@ -181,16 +196,46 @@ body {
 
     .map-container-wrapper {
         width: 100%;
+        text-align: center;
+        align-items: center; 
+        padding: 0 20px; 
+        box-sizing: border-box; 
+        margin-right: 0; 
+    }
+
+    .map-container {
+        width: 100%; 
+        max-width: 100%;
     }
 
     .image-display {
         width: 100%;
+        text-align: center;
+        padding: 0 20px; 
+        box-sizing: border-box; 
+    }
+
+    .play-header-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .play-header {
+        text-align: center; 
+        margin-bottom: 10px;
     }
 
     .play-buttons {
         width: 100%;
         text-align: center;
-        order: -1; /* Move the buttons to the top */
-        margin-bottom: 20px; /* Add margin to separate from the map */
+        order: -1; 
+        margin-bottom: 20px; 
     }
+}
+
+.play-header-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
 }
