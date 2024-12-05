@@ -82,5 +82,13 @@
   {
     "image": "ikb_snow.jpg",
     "coordinates": { "lat": 49.26698664443532, "lng": -123.25460748650869 }
+  },
+  {
+    "image": "busloop_sunset.jpg",
+    "coordinates": { "lat": 49.26725842055672, "lng": -123.24729190999138 }
+  },
+  {
+    "image": "rosegarden.jpg",
+    "coordinates": { "lat": 49.26918811122492, "lng": -123.25640001412881 }
   }
 ]
