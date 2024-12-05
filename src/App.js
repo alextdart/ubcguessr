@@ -6,8 +6,7 @@ import Play from "./components/Play";
 import About from "./components/About";
 import FinalScore from "./components/FinalScore"; // Import the new component
 import "./styles.css";
-import { Analytics } from "@vercel/analytics/react"
-
+import { Analytics } from "@vercel/analytics/react";
 
 const App = () => {
     return (
@@ -19,7 +18,7 @@ const App = () => {
                 <Route path="/about" element={<About />} />
                 <Route path="/final-score" element={<FinalScore />} /> {/* Add the new route */}
             </Routes>
-            <Analytics/>
+            <Analytics /> 
         </Router>
     );
 };

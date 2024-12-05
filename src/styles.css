@@ -1,4 +1,11 @@
-/* General body styling */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,7 +14,6 @@ body {
     color: #333;
 }
 
-/* Navbar styling */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -15,6 +21,8 @@ body {
     background-color: #8221cf;
     padding: 10px 20px;
     color: white;
+    width: 100%; 
+    box-sizing: border-box; 
 }
 
 .navbar .logo {
@@ -38,7 +46,6 @@ body {
     color: #ffdd00;
 }
 
-/* Centering content on the home page */
 .home-page {
     display: flex;
     flex-direction: column;
@@ -53,8 +60,6 @@ body {
     opacity: 0.3;
     background: rgb(117, 17, 180) url("../public/images/ubc-background.jpg") no-repeat fixed top;
     background-blend-mode: luminosity;
-    /* also change the blend mode to what suits you, from darken, to other 
-    many options as you deem fit*/
     background-size: cover;
     top: 0;
     left: 0;
@@ -80,7 +85,6 @@ body {
     background-color: #58168d;
 }
 
-/* Header for Play Page: Score and Round */
 .play-header {
     margin-bottom: 20px;
     text-align: center;
@@ -91,14 +95,13 @@ body {
     margin: 5px;
 }
 
-/* Main section for Play page: Image and Map Side by Side */
 .play-main {
     display: flex;
     gap: 20px;
-    width: 90%;
+    width: 100%; 
     margin: 0 auto;
     justify-content: space-between;
-    align-items: flex-start; /* Align items to the start */
+    align-items: flex-start; 
 }
 
 .map-container-wrapper {
@@ -106,7 +109,7 @@ body {
     flex-direction: column;
     flex: 1;
     position: sticky;
-    top: 0; /* Stick to the top of the viewport */
+    top: 0;
 }
 
 .map-container {
@@ -114,7 +117,7 @@ body {
     border: 3px solid #8221cf;
     border-radius: 10px;
     overflow: hidden;
-    margin-bottom: 20px; /* Add margin to separate from button */
+    margin-bottom: 20px;
 }
 
 .image-display {
@@ -130,7 +133,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Buttons on Play page */
 .play-buttons {
     margin-top: 20px;
     text-align: center;
@@ -157,4 +159,36 @@ body {
 
 .final-score-container {
     padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    .play-main {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .map-container-wrapper {
+        width: 100%;
+    }
+
+    .image-display {
+        width: 100%;
+    }
+
+    .play-buttons {
+        width: 100%;
+        text-align: center;
+    }
 }
