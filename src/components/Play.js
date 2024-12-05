@@ -98,12 +98,22 @@ const Play = () => {
             { latitude: userGuess.lat, longitude: userGuess.lng }
         );
 
-        const roundScore = Math.round(Math.max(1000 - distance, 0));
+        var roundScore = 0;
+
+        if (distance <= 5) {
+            roundScore = 1000;
+        } else {
+            roundScore = Math.round(Math.max(995 - distance, 0));
+        }
         setScores((prevScores) => [...prevScores, roundScore]);
         setShowResults(true);
 
         setTimeout(() => {
-            alert(`You were ${distance} meters away! You earned ${roundScore} points.`);
+            if (distance <= 5) {
+                alert(`Spot on! You earned 1000 points!`);
+            } else {
+                alert(`You were ${distance} meters away! You earned ${roundScore} points.`);
+            }
         }, 100); // 100ms delay 
     };
 
