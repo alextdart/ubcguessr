@@ -7,7 +7,8 @@ const Home = () => {
 
     return (
         <div className="home-page">
-            <h1>Welcome to ubcguessr!</h1>
+            <h1>Do you think you know UBC Campus?</h1>
+            <h2>Test your skills here on UBCguessr!</h2>
             <button 
                 onClick={() => navigate("/play")} 
                 className="start-button"
