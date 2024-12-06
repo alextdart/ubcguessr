@@ -90,5 +90,208 @@
   {
     "image": "rosegarden.jpg",
     "coordinates": { "lat": 49.26918811122492, "lng": -123.25640001412881 }
+  },
+  {
+    "image": "michael_m_1.jpg",
+    "coordinates": {
+      "lat": 49.2665726,
+      "lng": -123.24995169972222
+    }
+  },
+  {
+    "image": "michael_m_2.jpg",
+    "coordinates": {
+      "lat": 49.2618305,
+      "lng": -123.2489158
+    }
+  },
+  {
+    "image": "michael_m_3.jpg",
+    "coordinates": {
+      "lat": 49.2649338,
+      "lng": -123.2474904
+    }
+  },
+  {
+    "image": "michael_m_4.jpg",
+    "coordinates": {
+      "lat": 49.2616311,
+      "lng": -123.2493082
+    }
+  },
+  {
+    "image": "michael_m_5.jpg",
+    "coordinates": {
+      "lat": 49.26422769972222,
+      "lng": -123.25722109972222
+    }
+  },
+  {
+    "image": "michael_m_6.jpg",
+    "coordinates": {
+      "lat": 49.265442999722225,
+      "lng": -123.2581071
+    }
+  },
+  {
+    "image": "michael_m_7.jpg",
+    "coordinates": {
+      "lat": 49.266125099722224,
+      "lng": -123.25886289972222
+    }
+  },
+  {
+    "image": "michael_m_8.jpg",
+    "coordinates": {
+      "lat": 49.2672248,
+      "lng": -123.256476
+    }
+  },
+  {
+    "image": "michael_m_9.jpg",
+    "coordinates": {
+      "lat": 49.2621784,
+      "lng": -123.25029569972222
+    }
+  },
+  {
+    "image": "michael_m_10.jpg",
+    "coordinates": {
+      "lat": 49.275252199722225,
+      "lng": -123.25173209972222
+    }
+  },
+  {
+    "image": "michael_m_11.jpg",
+    "coordinates": {
+      "lat": 49.263576899722224,
+      "lng": -123.23966599972222
+    }
+  },
+  {
+    "image": "michael_m_12.jpg",
+    "coordinates": {
+      "lat": 49.26905779972222,
+      "lng": -123.2591656
+    }
+  },
+  {
+    "image": "michael_m_13.jpg",
+    "coordinates": {
+      "lat": 49.2681088,
+      "lng": -123.2479488
+    }
+  },
+  {
+    "image": "michael_m_14.jpg",
+    "coordinates": {
+      "lat": 49.258823,
+      "lng": -123.24742
+    }
+  },
+  {
+    "image": "anonymous_1_1.jpg",
+    "coordinates": {
+      "lat": 49.26725277777778,
+      "lng": -123.25334166666667
+    }
+  },
+  {
+    "image": "anonymous_1_2.jpg",
+    "coordinates": {
+      "lat": 49.26645,
+      "lng": -123.24530833333334
+    }
+  },
+  {
+    "image": "anonymous_1_3.jpg",
+    "coordinates": {
+      "lat": 49.26423888888889,
+      "lng": -123.25855277777778
+    }
+  },
+  {
+    "image": "anonymous_1_4.jpg",
+    "coordinates": {
+      "lat": 49.258525,
+      "lng": -123.25183055555556
+    }
+  },
+  {
+    "image": "anonymous_1_5.jpg",
+    "coordinates": {
+      "lat": 49.25888888888889,
+      "lng": -123.25118888888889
+    }
+  },
+  {
+    "image": "anonymous_1_6.jpg",
+    "coordinates": {
+      "lat": 49.25891111111111,
+      "lng": -123.25093888888888
+    }
+  },
+  {
+    "image": "anonymous_1_7.jpg",
+    "coordinates": {
+      "lat": 49.262969444444444,
+      "lng": -123.24336944444444
+    }
+  },
+  {
+    "image": "anonymous_1_8.jpg",
+    "coordinates": {
+      "lat": 49.26403333333333,
+      "lng": -123.25530277777777
+    }
+  },
+  {
+    "image": "anonymous_1_9.jpg",
+    "coordinates": {
+      "lat": 49.26646111111111,
+      "lng": -123.25106944444444
+    }
+  },
+  {
+    "image": "anonymous_1_10.jpg",
+    "coordinates": {
+      "lat": 49.266616666666664,
+      "lng": -123.24987777777778
+    }
+  },
+  {
+    "image": "anonymous_1_11.jpg",
+    "coordinates": {
+      "lat": 49.262233333333334,
+      "lng": -123.24468888888889
+    }
+  },
+  {
+    "image": "anonymous_1_12.jpg",
+    "coordinates": {
+      "lat": 49.26092222222222,
+      "lng": -123.24809166666667
+    }
+  },
+  {
+    "image": "anonymous_1_13.jpg",
+    "coordinates": {
+      "lat": 49.27036944444444,
+      "lng": -123.25073888888889
+    }
+  },
+  {
+    "image": "anonymous_1_14.jpg",
+    "coordinates": {
+      "lat": 49.25684722222222,
+      "lng": -123.25199166666667
+    }
+  },
+  {
+    "image": "anonymous_1_15.jpg",
+    "coordinates": {
+      "lat": 49.26667777777778,
+      "lng": -123.25014444444444
+    }
   }
 ]

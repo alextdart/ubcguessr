@@ -25,7 +25,7 @@ const About = () => {
             <hr></hr>
 
             <h2>Cheers to all Image Contributors:</h2>
-            <p>Matt B., Emily D., Mikey L., Davey R.</p>
+            <p>Matt B., Emily D., Mikey L., Davey R., Michael M.</p>
         </div>
     );
 };
