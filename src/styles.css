@@ -290,11 +290,19 @@ body {
 
 .leaderboard-container {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
 }
 
-.submit-score, .leaderboard {
+.leaderboard-columns {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.leaderboard {
     flex: 1;
     margin: 0 10px;
 }
@@ -317,6 +325,23 @@ body {
 .leaderboard-table th {
     background-color: #f2f2f2;
     text-align: left;
+}
+
+.leaderboards-page {
+    padding: 20px;
+    text-align: center;
+}
+
+.leaderboards-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.leaderboard {
+    flex: 1;
+    margin: 0 10px;
 }
 
 @media (max-width: 768px) {
@@ -419,7 +444,27 @@ body {
         align-items: center;
     }
 
+    .leaderboard-columns {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .leaderboard {
+        width: 100%;
+        margin: 10px 0;
+    }
+
     .submit-score, .leaderboard {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .leaderboards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .leaderboard {
         width: 100%;
         margin: 10px 0;
     }
