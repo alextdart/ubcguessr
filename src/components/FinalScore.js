@@ -36,10 +36,11 @@ const FinalScore = () => {
     }, []);
 
     const handleSubmitScore = () => {
+        console.log(JSON.stringify({ name, score: scores.reduce((a, b) => a + b, 0) }));
         fetch('/api/submitScore', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({ name, score: scores.reduce((a, b) => a + b, 0) })
         })
