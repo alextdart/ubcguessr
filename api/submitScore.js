@@ -8,6 +8,7 @@ if (!global._mongoClientPromise) {
     client = new MongoClient(uri, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 5000, 
     });
     global._mongoClientPromise = client.connect();
 }
@@ -18,6 +19,10 @@ export default async function handler(req, res) {
         const { name, score } = req.body;
         const date = new Date();
 
+        if (!name || !score) {
+            return res.status(400).json({ error: 'Name and score are required' });
+        }
+
         try {
             const client = await clientPromise;
             const database = client.db('leaderboard');
@@ -27,7 +32,8 @@ export default async function handler(req, res) {
 
             res.status(200).json({ message: 'Score submitted successfully' });
         } catch (error) {
-            res.status(500).json({ error: 'Failed to submit score' });
+            console.error('Error submitting score:', error);
+            res.status(500).json({ error: 'Failed to submit score', details: error.message });
         }
     } else {
         res.status(405).json({ error: 'Method not allowed' });
