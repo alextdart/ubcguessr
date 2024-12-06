@@ -1,7 +1,17 @@
 import { MongoClient } from 'mongodb';
 
 const uri = process.env.MONGODB_URI;
-const client = new MongoClient(uri);
+let client;
+let clientPromise;
+
+if (!global._mongoClientPromise) {
+    client = new MongoClient(uri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+    global._mongoClientPromise = client.connect();
+}
+clientPromise = global._mongoClientPromise;
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
@@ -9,7 +19,7 @@ export default async function handler(req, res) {
         const date = new Date();
 
         try {
-            await client.connect();
+            const client = await clientPromise;
             const database = client.db('leaderboard');
             const collection = database.collection('scores');
 
@@ -18,8 +28,6 @@ export default async function handler(req, res) {
             res.status(200).json({ message: 'Score submitted successfully' });
         } catch (error) {
             res.status(500).json({ error: 'Failed to submit score' });
-        } finally {
-            await client.close();
         }
     } else {
         res.status(405).json({ error: 'Method not allowed' });
