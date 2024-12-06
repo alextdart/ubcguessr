@@ -47,8 +47,14 @@ const FinalScore = () => {
         })
             .then((response) => {
                 if (!response.ok) {
-                    return response.json().then((error) => {
-                        throw new Error(error.message);
+                    console.error("Error:", response.status, response.statusText);
+                    return response.text().then((text) => {
+                        try {
+                            const json = JSON.parse(text);
+                            throw new Error(json.message);
+                        } catch {
+                            throw new Error(text);
+                        }
                     });
                 }
                 return response.json();
