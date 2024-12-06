@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import DOMPurify from 'dompurify';
+import Filter from 'bad-words';
 import "../styles.css";
 
 // Custom icons
@@ -36,7 +38,13 @@ const FinalScore = () => {
     }, []);
 
     const handleSubmitScore = () => {
-        const requestBody = { name, score: scores.reduce((a, b) => a + b, 0) };
+        const filter = new Filter();
+        const sanitizedInput = DOMPurify.sanitize(name);
+        if (filter.isProfane(sanitizedInput)) {
+            alert("Please use appropriate language.");
+            return;
+        }
+        const requestBody = { name: sanitizedInput, score: scores.reduce((a, b) => a + b, 0) };
         console.log(JSON.stringify(requestBody));
         fetch('/api/submitScore', {
             method: 'POST',
