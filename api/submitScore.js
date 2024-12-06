@@ -25,6 +25,14 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: 'Name and score are required' });
         }
 
+        if (score > 5000) {
+            return res.status(400).json({ error: 'Invalid score.' });
+        }
+
+        if (name.includes('http') || name.includes('@')) {
+            return res.status(400).json({ error: 'Invalid name. Please avoid using links or "@" in your name.' });
+        }
+
         try {
             const client = await clientPromise;
             const database = client.db('leaderboard');

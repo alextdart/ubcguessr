@@ -41,11 +41,24 @@ const FinalScore = () => {
     const handleSubmitScore = () => {
         const filter = new Filter();
         const sanitizedInput = DOMPurify.sanitize(name);
+        const totalScore = scores.reduce((a, b) => a + b, 0);
+
         if (filter.isProfane(sanitizedInput)) {
             alert("Please use appropriate language.");
             return;
         }
-        const requestBody = { name: sanitizedInput, score: scores.reduce((a, b) => a + b, 0) };
+
+        if (totalScore > 5000) {
+            alert("Invalid score.");
+            return;
+        }
+
+        if (sanitizedInput.includes('http') || sanitizedInput.includes('@')) {
+            alert("Invalid name. Please avoid using links or '@' in your name.");
+            return;
+        }
+
+        const requestBody = { name: sanitizedInput, score: totalScore };
         console.log(JSON.stringify(requestBody));
         fetch('/api/submitScore', {
             method: 'POST',
