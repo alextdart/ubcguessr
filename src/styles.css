@@ -288,6 +288,37 @@ body {
     background-color: #58168d;
 }
 
+.leaderboard-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.submit-score, .leaderboard {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.name-input {
+    margin: 10px 0;
+    padding: 5px;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leaderboard-table th, .leaderboard-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.leaderboard-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
 @media (max-width: 768px) {
     .navbar {
         flex-direction: row; 
