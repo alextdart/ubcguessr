@@ -36,19 +36,30 @@ const FinalScore = () => {
     }, []);
 
     const handleSubmitScore = () => {
-        console.log(JSON.stringify({ name, score: scores.reduce((a, b) => a + b, 0) }));
+        const requestBody = { name, score: scores.reduce((a, b) => a + b, 0) };
+        console.log(JSON.stringify(requestBody));
         fetch('/api/submitScore', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ name, score: scores.reduce((a, b) => a + b, 0) })
+            body: JSON.stringify(requestBody)
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    return response.json().then((error) => {
+                        throw new Error(error.message);
+                    });
+                }
+                return response.json();
+            })
             .then(() => {
                 fetch('/api/getLeaderboard')
                     .then((response) => response.json())
                     .then((data) => setLeaderboard(data));
+            })
+            .catch((error) => {
+                console.error('Error submitting score:', error);
             });
     };
 
