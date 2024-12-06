@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import DOMPurify from 'dompurify';
-import Filter from 'bad-words';
+import { Filter } from 'bad-words';
 import "../styles.css";
 
 // Custom icons
