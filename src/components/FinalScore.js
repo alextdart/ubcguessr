@@ -30,6 +30,7 @@ const FinalScore = () => {
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [leaderboard, setLeaderboard] = useState([]);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     useEffect(() => {
         fetch('/api/getLeaderboard')
@@ -68,6 +69,7 @@ const FinalScore = () => {
                 return response.json();
             })
             .then(() => {
+                setIsSubmitted(true);
                 fetch('/api/getLeaderboard')
                     .then((response) => response.json())
                     .then((data) => setLeaderboard(data));
@@ -127,8 +129,9 @@ const FinalScore = () => {
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Enter your name"
                         className="name-input"
+                        disabled={isSubmitted}
                     />
-                    <button onClick={handleSubmitScore} className="btn-secondary">
+                    <button onClick={handleSubmitScore} className="btn-secondary" disabled={isSubmitted}>
                         Submit Score
                     </button>
                 </div>

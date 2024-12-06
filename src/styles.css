@@ -407,7 +407,21 @@ body {
 
     .final-score-map {
         width: 90%; 
-        height: 400px; 
+        height: 350px; 
+    }
+
+    .leaflet-container {
+        height: 350px !important; /* Ensure the height is overridden */
+    }
+
+    .leaderboard-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .submit-score, .leaderboard {
+        width: 100%;
+        margin: 10px 0;
     }
 }
 
