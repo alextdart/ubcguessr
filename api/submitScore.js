@@ -1,4 +1,6 @@
 import { MongoClient } from 'mongodb';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const uri = process.env.MONGODB_URI;
 let client;
@@ -8,7 +10,7 @@ if (!global._mongoClientPromise) {
     client = new MongoClient(uri, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        serverSelectionTimeoutMS: 5000, 
+        serverSelectionTimeoutMS: 10000, 
     });
     global._mongoClientPromise = client.connect();
 }
