@@ -293,5 +293,110 @@
       "lat": 49.26667777777778,
       "lng": -123.25014444444444
     }
+  },
+  {
+    "image": "assorted_1_1.jpg",
+    "coordinates": {
+      "lat": 49.2657268,
+      "lng": -123.2438338
+    }
+  },
+  {
+    "image": "assorted_1_2.jpg",
+    "coordinates": {
+      "lat": 49.2662552,
+      "lng": -123.242356
+    }
+  },
+  {
+    "image": "assorted_1_3.jpg",
+    "coordinates": {
+      "lat": 49.26059444444444,
+      "lng": -123.25291666666666
+    }
+  },
+  {
+    "image": "assorted_1_4.jpg",
+    "coordinates": {
+      "lat": 49.26365555555556,
+      "lng": -123.25435555555555
+    }
+  },
+  {
+    "image": "assorted_1_5.jpg",
+    "coordinates": {
+      "lat": 49.266625,
+      "lng": -123.25954444444444
+    }
+  },
+  {
+    "image": "assorted_1_7.jpg",
+    "coordinates": {
+      "lat": 49.27101388888889,
+      "lng": -123.25034444444445
+    }
+  },
+  {
+    "image": "assorted_1_8.jpg",
+    "coordinates": {
+      "lat": 49.25994722222222,
+      "lng": -123.24849722222223
+    }
+  },
+  {
+    "image": "assorted_1_9.jpg",
+    "coordinates": {
+      "lat": 49.27519722222222,
+      "lng": -123.25193055555556
+    }
+  },
+  {
+    "image": "assorted_1_10.jpg",
+    "coordinates": {
+      "lat": 49.271477777777775,
+      "lng": -123.2505861111111
+    }
+  },
+  {
+    "image": "assorted_1_11.jpg",
+    "coordinates": {
+      "lat": 49.267005555555556,
+      "lng": -123.25125833333334
+    }
+  },
+  {
+    "image": "assorted_1_12.jpg",
+    "coordinates": {
+      "lat": 49.266191666666664,
+      "lng": -123.25078055555555
+    }
+  },
+  {
+    "image": "assorted_1_14.jpg",
+    "coordinates": {
+      "lat": 49.26461944444444,
+      "lng": -123.24472222222222
+    }
+  },
+  {
+    "image": "assorted_1_15.jpg",
+    "coordinates": {
+      "lat": 49.26371944444445,
+      "lng": -123.25073055555555
+    }
+  },
+  {
+    "image": "assorted_1_16.jpg",
+    "coordinates": {
+      "lat": 49.265975,
+      "lng": -123.24223055555555
+    }
+  },
+  {
+    "image": "assorted_1_17.jpg",
+    "coordinates": {
+      "lat": 49.262425,
+      "lng": -123.25103055555556
+    }
   }
 ]
