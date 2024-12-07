@@ -398,8 +398,10 @@ body {
     }
 
     .play-header-buttons {
-        flex-direction: column;
+        flex-direction: row; /* Change to row */
         align-items: center;
+        justify-content: space-between; /* Ensure space between elements */
+        width: 100%;
     }
 
     .play-header {
@@ -408,10 +410,12 @@ body {
     }
 
     .play-buttons {
-        width: 100%;
+        width: auto; /* Adjust width */
         text-align: center;
-        order: -1; 
-        margin-bottom: 20px; 
+        order: 0; /* Ensure correct order */
+        margin-bottom: 0; /* Remove bottom margin */
+        display: flex;
+        align-items: center; /* Vertically center the button */
     }
 
     .final-score-content {
@@ -475,4 +479,13 @@ body {
     justify-content: space-between;
     width: 100%;
     padding: 0 20px;
+}
+
+.result-message {
+    margin: 10px 0;
+    padding: 5px 10px; /* Reduced padding */
+    background-color: #444444;
+    color: white; /* Changed text color to white */
+    border-radius: 5px;
+    text-align: center;
 }
