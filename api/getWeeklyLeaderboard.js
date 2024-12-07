@@ -1,4 +1,3 @@
-
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -26,8 +25,17 @@ export default async function handler(req, res) {
 
             const today = new Date();
             const firstDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+            firstDayOfWeek.setUTCHours(0, 0, 0, 0); // Set to midnight UTC
+            const localFirstDayOfWeek = new Date(firstDayOfWeek.getTime() - firstDayOfWeek.getTimezoneOffset() * 60000); // Convert to local midnight
 
-            const weeklyScores = await collection.find({ date: { $gte: firstDayOfWeek } }).sort({ score: -1 }).limit(20).toArray();
+            const startOfWeek = new Date(localFirstDayOfWeek);
+            startOfWeek.setHours(8, 0, 0, 0); // Set to 8am local time
+
+            const endOfWeek = new Date(startOfWeek);
+            endOfWeek.setDate(endOfWeek.getDate() + 7); // Move to the next week
+            endOfWeek.setHours(7, 59, 59, 999); // Set to 7:59:59.999am local time
+
+            const weeklyScores = await collection.find({ date: { $gte: startOfWeek, $lt: endOfWeek } }).sort({ score: -1 }).limit(20).toArray();
 
             res.status(200).json(weeklyScores);
         } catch (error) {
