@@ -25,7 +25,7 @@ const About = () => {
             <hr></hr>
 
             <h2>Cheers to all Image Contributors:</h2>
-            <p>Matt B., Emily D., Mikey L., Davey R., Michael M., Guillermo, Kumar R., Anouk, Rain, Eric S., EJ F., and Andy C. (so far)</p>
+            <p>Matt B., Emily D., Mikey L., Davey R., Michael M., Guillermo, Kumar R., Rain, Eric S., EJ F., Andy C., Ardian A., Zaagi, Griffin V. (and those who didn't want credit)</p>
         </div>
     );
 };
