@@ -26,7 +26,8 @@ const Leaderboards = () => {
             <h2>Leaderboards</h2>
             <div className="leaderboards-container">
                 <div className="leaderboard">
-                    <h3>Daily Leaderboard (Top 20)</h3>
+                    <h2>Daily Leaderboard (Top 20)</h2>
+                    <h3>Resets Daily at 4pm</h3>
                     <table className="leaderboard-table">
                         <thead>
                             <tr>
@@ -47,7 +48,8 @@ const Leaderboards = () => {
                     </table>
                 </div>
                 <div className="leaderboard">
-                    <h3>Weekly Leaderboard (Top 20)</h3>
+                    <h2>Weekly Leaderboard (Top 20)</h2>
+                    <h3>Resets Saturdays at 4pm</h3>
                     <table className="leaderboard-table">
                         <thead>
                             <tr>
@@ -68,7 +70,8 @@ const Leaderboards = () => {
                     </table>
                 </div>
                 <div className="leaderboard">
-                    <h3>All-time Leaderboard (Top 20)</h3>
+                    <h2>All-time Leaderboard (Top 20)</h2>
+                    <h3>Persistent</h3>
                     <table className="leaderboard-table">
                         <thead>
                             <tr>

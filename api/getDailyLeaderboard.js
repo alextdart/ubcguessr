@@ -1,3 +1,4 @@
+
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -24,17 +25,9 @@ export default async function handler(req, res) {
             const collection = database.collection('scores');
 
             const today = new Date();
-            today.setUTCHours(0, 0, 0, 0); // Set to midnight UTC
-            const localMidnight = new Date(today.getTime() - today.getTimezoneOffset() * 60000); // Convert to local midnight
+            today.setHours(0, 0, 0, 0);
 
-            const startOfDay = new Date(localMidnight);
-            startOfDay.setHours(8, 0, 0, 0); // Set to 8am local time
-
-            const endOfDay = new Date(startOfDay);
-            endOfDay.setDate(endOfDay.getDate() + 1); // Move to the next day
-            endOfDay.setHours(7, 59, 59, 999); // Set to 7:59:59.999am local time
-
-            const dailyScores = await collection.find({ date: { $gte: startOfDay, $lt: endOfDay } }).sort({ score: -1 }).limit(20).toArray();
+            const dailyScores = await collection.find({ date: { $gte: today } }).sort({ score: -1 }).limit(20).toArray();
 
             res.status(200).json(dailyScores);
         } catch (error) {
