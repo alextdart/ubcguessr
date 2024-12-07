@@ -82,6 +82,15 @@ const Map = ({ onPinPlaced, correctLocation, userGuess, showResults, resetMap })
     );
 };
 
+const ResultMessage = ({ message, show }) => {
+    if (!show) return null;
+    return (
+        <div className="result-message">
+            <p>{message}</p>
+        </div>
+    );
+};
+
 const Play = () => {
     const [shuffledImages, setShuffledImages] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -92,6 +101,8 @@ const Play = () => {
     const [resetMap, setResetMap] = useState(false);
     const [guessLocations, setGuessLocations] = useState([]);
     const [correctLocations, setCorrectLocations] = useState([]);
+    const [resultMessage, setResultMessage] = useState("");
+    const [showResultMessage, setShowResultMessage] = useState(false);
     const totalRounds = 5;
     const navigate = useNavigate();
 
@@ -122,20 +133,19 @@ const Play = () => {
         if (distance <= 5) {
             roundScore = 1000;
         } else {
-            roundScore = Math.round(Math.max(995 - distance, 0));
+            roundScore = Math.round(Math.max(1000 - distance, 0));
         }
         setScores((prevScores) => [...prevScores, roundScore]);
         setGuessLocations((prevGuesses) => [...prevGuesses, userGuess]);
         setCorrectLocations((prevCorrects) => [...prevCorrects, correctLocation]);
         setShowResults(true);
+        setShowResultMessage(true);
 
-        setTimeout(() => {
-            if (distance <= 5) {
-                alert(`Spot on! You earned 1000 points!`);
-            } else {
-                alert(`You were ${distance} meters away! You earned ${roundScore} points.`);
-            }
-        }, 100); // 100ms delay 
+        if (distance <= 5) {
+            setResultMessage(`Spot on! You earned 1000 points!`);
+        } else {
+            setResultMessage(`You were ${distance} meters away! You earned ${roundScore} points.`);
+        }
     };
 
     const handleNextRound = () => {
@@ -146,6 +156,7 @@ const Play = () => {
             setCurrentIndex((prevIndex) => prevIndex + 1);
             setUserGuess(null);
             setShowResults(false);
+            setShowResultMessage(false);
             setResetMap(true);
             setTimeout(() => setResetMap(false), 0); // Reset the map after state update
         }
@@ -178,6 +189,7 @@ const Play = () => {
                             )}
                         </div>
                     </div>
+                    <ResultMessage message={resultMessage} show={showResultMessage} />
                     <Map
                         onPinPlaced={handlePinPlaced}
                         correctLocation={shuffledImages[currentIndex].coordinates}
