@@ -17,6 +17,14 @@ if (!global._mongoClientPromise) {
 }
 clientPromise = global._mongoClientPromise;
 
+// from https://stackoverflow.com/questions/4156434/javascript-get-the-first-day-of-the-week-from-current-date
+function setToMonday( date ) {
+    var day = date.getDay() || 7;  
+    if( day !== 1 ) 
+        date.setHours(-24 * (day - 1)); 
+    return date;
+}
+
 export default async function handler(req, res) {
     if (req.method === 'GET') {
         try {
@@ -25,9 +33,8 @@ export default async function handler(req, res) {
             const collection = database.collection('scores');
 
             const today = new Date();
-            const firstDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
 
-            const weeklyScores = await collection.find({ date: { $gte: firstDayOfWeek } }).sort({ score: -1 }).limit(20).toArray();
+            const weeklyScores = await collection.find({ date: { $gte: setToMonday(new today) } }).sort({ score: -1 }).limit(20).toArray();
 
             res.status(200).json(weeklyScores);
         } catch (error) {
