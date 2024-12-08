@@ -10,7 +10,7 @@ export default async function handler(req, res) {
             const database = client.db('leaderboard');
             const collection = database.collection('scores');
 
-            const leaderboard = await collection.find().sort({ score: -1 }).limit(20).toArray();
+            const leaderboard = await collection.find().sort({ score: -1 }).limit(30).toArray();
 
             res.status(200).json(leaderboard);
         } catch (error) {

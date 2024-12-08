@@ -27,7 +27,7 @@ export default async function handler(req, res) {
             const today = new Date();
             today.setHours(0, 0, 0, 0);
 
-            const dailyScores = await collection.find({ date: { $gte: today } }).sort({ score: -1 }).limit(20).toArray();
+            const dailyScores = await collection.find({ date: { $gte: today } }).sort({ score: -1 }).limit(30).toArray();
 
             res.status(200).json(dailyScores);
         } catch (error) {
