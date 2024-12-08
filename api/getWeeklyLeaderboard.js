@@ -34,7 +34,7 @@ export default async function handler(req, res) {
 
             const today = new Date();
 
-            const weeklyScores = await collection.find({ date: { $gte: setToMonday(new today) } }).sort({ score: -1 }).limit(20).toArray();
+            const weeklyScores = await collection.find({ date: { $gte: setToMonday(today) } }).sort({ score: -1 }).limit(20).toArray();
 
             res.status(200).json(weeklyScores);
         } catch (error) {
