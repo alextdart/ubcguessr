@@ -25,6 +25,10 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: 'Name and score are required' });
         }
 
+        if (typeof score !== 'number' || isNaN(score)) {
+            return res.status(400).json({ error: 'Score must be a valid number.' });
+        }
+
         if (score > 5000) {
             return res.status(400).json({ error: 'Invalid score.' });
         }
