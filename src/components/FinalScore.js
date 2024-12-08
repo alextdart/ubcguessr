@@ -160,7 +160,7 @@ const FinalScore = () => {
                 </div>
                 <div className="leaderboard-columns">
                     <div className="leaderboard">
-                        <h2>Daily Leaderboard (Top 20)</h2>
+                        <h2>Daily Leaderboard (Top 30)</h2>
                         <h3>Resets Daily at 4pm</h3>
                         <table className="leaderboard-table">
                             <thead>
@@ -182,8 +182,8 @@ const FinalScore = () => {
                         </table>
                     </div>
                     <div className="leaderboard">
-                        <h2>Weekly Leaderboard (Top 20)</h2>
-                        <h3>Resets Saturdays at 4pm</h3>
+                        <h2>Weekly Leaderboard (Top 30)</h2>
+                        <h3>Resets Sundays at 4pm</h3>
                         <table className="leaderboard-table">
                             <thead>
                                 <tr>
@@ -204,7 +204,7 @@ const FinalScore = () => {
                         </table>
                     </div>
                     <div className="leaderboard">
-                        <h2>All-time Leaderboard (Top 20)</h2>
+                        <h2>All-time Leaderboard (Top 30)</h2>
                         <h3>Persistent</h3>
                         <table className="leaderboard-table">
                             <thead>
