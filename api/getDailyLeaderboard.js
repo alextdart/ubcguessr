@@ -1,4 +1,3 @@
-
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -27,7 +26,7 @@ export default async function handler(req, res) {
             const today = new Date();
             today.setHours(0, 0, 0, 0);
 
-            const dailyScores = await collection.find({ date: { $gte: today } }).sort({ score: -1 }).limit(30).toArray();
+            const dailyScores = await collection.find({ date: { $gte: today } }).sort({ score: -1, date: 1 }).limit(30).toArray();
 
             res.status(200).json(dailyScores);
         } catch (error) {
