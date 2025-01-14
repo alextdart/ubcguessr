@@ -25,12 +25,7 @@ const About = () => {
             <hr></hr>
 
             <h2>Cheers to all Image Contributors:</h2>
-            <p>Matt B., Emily D., Mikey L., Davey R., Michael M., Guillermo, Kumar R., Rain, Eric S., EJ F., Andy C., Ardian A., Zaagi, Griffin V. (and those who didn't want credit)</p>
-
-            <hr></hr>
-
-            <h2>E-Week 2025</h2>
-            <p>Shout out to MINE and FIZZ for getting perfect scores on UBCguessr during E-Week 2025</p>
+            <p>Matt B., Emily D., Mikey L., Davey R., Michael M., Guillermo, Kumar R., Rain, Eric S., EJ F., Andy C., Ardian A., Zaagi, Griffin V., Moses L. (and those who didn't want credit)</p>
         </div>
     );
 };

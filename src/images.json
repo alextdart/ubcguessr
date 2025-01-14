@@ -164,8 +164,8 @@
   {
     "image": "michael_m_14.jpg",
     "coordinates": {
-      "lat": 49.258823,
-      "lng": -123.24742
+      "lat": 49.25308054681761,
+      "lng": -123.24841582262707
     }
   },
   {
@@ -403,7 +403,42 @@
     "image": "momo_1.jpg",
     "coordinates": {
       "lat": 49.2690912,
-      "lng":  -123.2543087
+      "lng": -123.2543087
+    }
+  },
+  {
+    "image": "forest_pyramid.jpg",
+    "coordinates": {
+      "lat": 49.26685306535914,
+      "lng": -123.25934056672287
+    }
+  },
+  {
+    "image": "stone_slabs.jpg",
+    "coordinates": {
+      "lat": 49.263167894379066,
+      "lng": -123.25295001432744
+    }
+  },
+  {
+    "image": "beta_hospital.jpg",
+    "coordinates": {
+      "lat": 49.26454257715481,
+      "lng": -123.24426585890288
+    }
+  },
+  {
+    "image": "agro_staircase.jpg",
+    "coordinates": {
+      "lat": 49.26097571670756,
+      "lng": -123.24831559851248
+    }
+  },
+  {
+    "image": "hospital_ww.jpg",
+    "coordinates": {
+      "lat": 49.26494541228316,
+      "lng": -123.24606702915311
     }
   }
 ]
