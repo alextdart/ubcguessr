@@ -91,7 +91,7 @@ const ResultMessage = ({ message, show }) => {
     );
 };
 
-const Play = () => {
+const Play = ({ gameMode = 'orientation' }) => {
     const [shuffledImages, setShuffledImages] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [userGuess, setUserGuess] = useState(null);
@@ -103,14 +103,25 @@ const Play = () => {
     const [correctLocations, setCorrectLocations] = useState([]);
     const [resultMessage, setResultMessage] = useState("");
     const [showResultMessage, setShowResultMessage] = useState(false);
+    const [gameTitle, setGameTitle] = useState("");
     const totalRounds = 5;
     const navigate = useNavigate();
+
+    // Get game title based on mode
+    useEffect(() => {
+        const titles = {
+            orientation: "UBC Orientation Challenge",
+            classic: "Classic UBCguessr",
+            challenge: "Challenge Mode"
+        };
+        setGameTitle(titles[gameMode] || titles.orientation);
+    }, [gameMode]);
 
     // Shuffle the images at the start of the game
     useEffect(() => {
         const loadImages = async () => {
             try {
-                const images = await gameAPI.getGameImages('public');
+                const images = await gameAPI.getGameImages(gameMode);
                 const shuffled = [...images].sort(() => Math.random() - 0.5);
                 setShuffledImages(shuffled.slice(0, totalRounds));
             } catch (error) {
@@ -118,11 +129,9 @@ const Play = () => {
                 alert('Error loading game images. Please try again.');
             }
         };
-        
-        loadImages();
-    }, []);
 
-    const handlePinPlaced = (position) => {
+        loadImages();
+    }, [gameMode]);    const handlePinPlaced = (position) => {
         setUserGuess(position);
     };
 
@@ -160,7 +169,7 @@ const Play = () => {
 
     const handleNextRound = () => {
         if (round >= totalRounds) {
-            navigate("/final-score", { state: { scores, guessLocations, correctLocations } });
+            navigate("/final-score", { state: { scores, guessLocations, correctLocations, gameMode, gameTitle } });
         } else {
             setRound((prevRound) => prevRound + 1);
             setCurrentIndex((prevIndex) => prevIndex + 1);
@@ -184,6 +193,7 @@ const Play = () => {
                 <div className="map-container-wrapper">
                     <div className="play-header-buttons">
                         <header className="play-header">
+                            <h1 className="game-mode-title">{gameTitle}</h1>
                             <h2>Score: {scores.reduce((a, b) => a + b, 0)}</h2>
                             <h3>Round {round}/{totalRounds}</h3>
                         </header>

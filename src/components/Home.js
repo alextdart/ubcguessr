@@ -7,14 +7,27 @@ const Home = () => {
 
     return (
         <div className="home-page">
-            <h1>Do you think you know UBC Campus?</h1>
-            <h2>Test your skills here on UBCguessr!</h2>
+            <div className="orientation-banner">
+                <h1>UBC Orientation 2025</h1>
+                <h2>Welcome to UBC! Test your knowledge of campus landmarks</h2>
+                <p>Get familiar with your new home by exploring the most iconic locations on campus</p>
+            </div>
+            
             <button 
-                onClick={() => navigate("/play")} 
-                className="start-button"
+                onClick={() => navigate("/play/orientation")} 
+                className="start-button orientation-button"
             >
-                Start Game
+                Orientation Challenge
             </button>
+            
+            <div className="secondary-options">
+                <button 
+                    onClick={() => navigate("/play/classic")} 
+                    className="classic-link"
+                >
+                    Play Classic Game
+                </button>
+            </div>
         </div>
     );
 };

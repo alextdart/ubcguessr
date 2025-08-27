@@ -151,3 +151,5 @@ dist
 
 # Mac stuff
 .DS_Store
+image-review-list.json
+admin-setup.sql
