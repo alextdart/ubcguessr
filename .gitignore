@@ -16,9 +16,16 @@ lerna-debug.log*
 # Debug Scripts (keep migration script but ignore tests)
 /scripts/test-*.mjs
 /scripts/debug-*.mjs
+/scripts
 
 # Backup files
 *.backup
+/public/images/game-backup/
+/src/images.json.backup
+
+# Export files
+mongodb-scores-export.json
+/build
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
