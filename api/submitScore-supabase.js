@@ -1,4 +1,4 @@
-import { gameAPI } from '../src/lib/supabase.js'
+import { gameAPI } from '../lib/supabase'
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {

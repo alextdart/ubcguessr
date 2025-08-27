@@ -5,6 +5,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import DOMPurify from 'dompurify';
 import { Filter } from 'bad-words';
+import { gameAPI } from "../lib/supabase";
 import "../styles.css";
 
 // Custom icons
@@ -35,20 +36,26 @@ const FinalScore = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     useEffect(() => {
-        fetch('/api/getLeaderboard')
-            .then((response) => response.json())
-            .then((data) => setLeaderboard(data));
+        const loadLeaderboards = async () => {
+            try {
+                const [allTime, daily, weekly] = await Promise.all([
+                    gameAPI.getLeaderboard('public', 'all', 30),
+                    gameAPI.getLeaderboard('public', 'daily', 30),
+                    gameAPI.getLeaderboard('public', 'weekly', 30)
+                ]);
+                
+                setLeaderboard(allTime);
+                setDailyLeaderboard(daily);
+                setWeeklyLeaderboard(weekly);
+            } catch (error) {
+                console.error('Error loading leaderboards:', error);
+            }
+        };
 
-        fetch('/api/getDailyLeaderboard')
-            .then((response) => response.json())
-            .then((data) => setDailyLeaderboard(data));
-
-        fetch('/api/getWeeklyLeaderboard')
-            .then((response) => response.json())
-            .then((data) => setWeeklyLeaderboard(data));
+        loadLeaderboards();
     }, []);
 
-    const handleSubmitScore = () => {
+    const handleSubmitScore = async () => {
         const filter = new Filter();
         const sanitizedInput = DOMPurify.sanitize(name);
         const totalScore = scores.reduce((a, b) => a + b, 0);
@@ -68,38 +75,44 @@ const FinalScore = () => {
             return;
         }
 
-        const requestBody = { name: sanitizedInput, score: totalScore };
-        console.log(JSON.stringify(requestBody));
-        fetch('/api/submitScore', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(requestBody)
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    console.error("Error:", response.status, response.statusText);
-                    return response.text().then((text) => {
-                        try {
-                            const json = JSON.parse(text);
-                            throw new Error(json.message);
-                        } catch {
-                            throw new Error(text);
-                        }
-                    });
-                }
-                return response.json();
-            })
-            .then(() => {
-                setIsSubmitted(true);
-                fetch('/api/getLeaderboard')
-                    .then((response) => response.json())
-                    .then((data) => setLeaderboard(data));
-            })
-            .catch((error) => {
-                console.error('Error submitting score:', error);
-            });
+        // Prepare rounds data for submission
+        const roundsData = scores.map((score, index) => ({
+            imageId: null, // We don't have image IDs from the old format
+            guess: guessLocations[index] ? {
+                lat: guessLocations[index].lat,
+                lng: guessLocations[index].lng
+            } : null,
+            correct: correctLocations[index] ? {
+                lat: correctLocations[index].lat,
+                lng: correctLocations[index].lng
+            } : null,
+            score: score,
+            distance: null // We could calculate this if needed
+        }));
+
+        try {
+            console.log('Submitting score:', { name: sanitizedInput, totalScore, roundsData });
+            
+            await gameAPI.submitScore(sanitizedInput, totalScore, roundsData, 'public');
+            
+            setIsSubmitted(true);
+            
+            // Refresh leaderboards
+            const [allTime, daily, weekly] = await Promise.all([
+                gameAPI.getLeaderboard('public', 'all', 30),
+                gameAPI.getLeaderboard('public', 'daily', 30),
+                gameAPI.getLeaderboard('public', 'weekly', 30)
+            ]);
+            
+            setLeaderboard(allTime);
+            setDailyLeaderboard(daily);
+            setWeeklyLeaderboard(weekly);
+            
+            console.log('Score submitted successfully and leaderboards updated');
+        } catch (error) {
+            console.error('Error submitting score:', error);
+            alert('Error submitting score. Please try again.');
+        }
     };
 
     const handlePlayAgain = () => {
