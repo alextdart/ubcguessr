@@ -3,18 +3,29 @@ import React, { useState, useEffect } from "react";
 import { gameAPI } from "../lib/supabase";
 import "../styles.css";
 
-const Leaderboards = () => {
+const Leaderboards = ({ gameMode = 'classic' }) => {
     const [leaderboard, setLeaderboard] = useState([]);
     const [dailyLeaderboard, setDailyLeaderboard] = useState([]);
     const [weeklyLeaderboard, setWeeklyLeaderboard] = useState([]);
+    const [gameTitle, setGameTitle] = useState("");
+
+    // Get game title based on mode
+    useEffect(() => {
+        const titles = {
+            orientation: "UBC Orientation Challenge",
+            classic: "Classic UBCguessr",
+            challenge: "Challenge Mode"
+        };
+        setGameTitle(titles[gameMode] || titles.classic);
+    }, [gameMode]);
 
     useEffect(() => {
         const loadLeaderboards = async () => {
             try {
                 const [allTime, daily, weekly] = await Promise.all([
-                    gameAPI.getLeaderboard('public', 'all', 30),
-                    gameAPI.getLeaderboard('public', 'daily', 30),
-                    gameAPI.getLeaderboard('public', 'weekly', 30)
+                    gameAPI.getLeaderboard(gameMode, 'all', 30),
+                    gameAPI.getLeaderboard(gameMode, 'daily', 30),
+                    gameAPI.getLeaderboard(gameMode, 'weekly', 30)
                 ]);
                 
                 setLeaderboard(allTime);
@@ -26,10 +37,11 @@ const Leaderboards = () => {
         };
 
         loadLeaderboards();
-    }, []);
+    }, [gameMode]);
 
     return (
         <div className="leaderboards-page">
+            <h1 className="game-mode-title">{gameTitle}</h1>
             <h2>Leaderboards</h2>
             <div className="leaderboards-container">
                 <div className="leaderboard">

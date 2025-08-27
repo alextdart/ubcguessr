@@ -27,7 +27,7 @@ const correctIcon = new L.Icon({
 
 const FinalScore = () => {
     const location = useLocation();
-    const { scores = [], guessLocations = [], correctLocations = [] } = location.state || {};
+    const { scores = [], guessLocations = [], correctLocations = [], gameMode = 'orientation', gameTitle = 'UBC Guessr' } = location.state || {};
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [leaderboard, setLeaderboard] = useState([]);
@@ -38,22 +38,22 @@ const FinalScore = () => {
     useEffect(() => {
         const loadLeaderboards = async () => {
             try {
-                const [allTime, daily, weekly] = await Promise.all([
-                    gameAPI.getLeaderboard('public', 'all', 30),
-                    gameAPI.getLeaderboard('public', 'daily', 30),
-                    gameAPI.getLeaderboard('public', 'weekly', 30)
+                const [allTimeData, dailyData, weeklyData] = await Promise.all([
+                    gameAPI.getLeaderboard(gameMode, 'all', 30),
+                    gameAPI.getLeaderboard(gameMode, 'daily', 30),
+                    gameAPI.getLeaderboard(gameMode, 'weekly', 30)
                 ]);
                 
-                setLeaderboard(allTime);
-                setDailyLeaderboard(daily);
-                setWeeklyLeaderboard(weekly);
+                setLeaderboard(allTimeData);
+                setDailyLeaderboard(dailyData);
+                setWeeklyLeaderboard(weeklyData);
             } catch (error) {
                 console.error('Error loading leaderboards:', error);
             }
         };
 
         loadLeaderboards();
-    }, []);
+    }, [gameMode]);
 
     const handleSubmitScore = async () => {
         const filter = new Filter();
@@ -93,7 +93,7 @@ const FinalScore = () => {
         try {
             console.log('Submitting score:', { name: sanitizedInput, totalScore, roundsData });
             
-            await gameAPI.submitScore(sanitizedInput, totalScore, roundsData, 'public');
+            await gameAPI.submitScore(sanitizedInput, totalScore, roundsData, gameMode);
             
             setIsSubmitted(true);
             
@@ -116,7 +116,7 @@ const FinalScore = () => {
     };
 
     const handlePlayAgain = () => {
-        navigate("/play");
+        navigate(`/play/${gameMode}`);
     };
 
     return (
@@ -125,6 +125,7 @@ const FinalScore = () => {
                 <div className="final-score-content">
                     <div className="final-score-text">
                         <div className="final-score-background"></div>
+                        <h1 className="game-mode-title">{gameTitle}</h1>
                         <h2>Final Score</h2>
                         <p>Total Score: {scores.reduce((a, b) => a + b, 0)}</p>
                         <h3>Round Scores:</h3>
