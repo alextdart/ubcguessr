@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Polyline, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { getDistance } from "geolib";
-import imageData from "../images.json";
+import { gameAPI } from "../lib/supabase";
 import L from "leaflet";
 import "../styles.css";
 
@@ -34,7 +34,7 @@ L.Icon.Default.mergeOptions({
 const ImageDisplay = ({ image }) => (
     <div className="image-display">
         <img
-            src={process.env.PUBLIC_URL + "/images/game/" + image}
+            src={gameAPI.getImageUrl(image)}
             alt="Guess this location"
             className="game-image"
         />
@@ -108,8 +108,18 @@ const Play = () => {
 
     // Shuffle the images at the start of the game
     useEffect(() => {
-        const shuffled = [...imageData].sort(() => Math.random() - 0.5); // Fisher-Yates shuffle
-        setShuffledImages(shuffled.slice(0, totalRounds)); // Select only the first `totalRounds` images
+        const loadImages = async () => {
+            try {
+                const images = await gameAPI.getGameImages('public');
+                const shuffled = [...images].sort(() => Math.random() - 0.5);
+                setShuffledImages(shuffled.slice(0, totalRounds));
+            } catch (error) {
+                console.error('Error loading images:', error);
+                alert('Error loading game images. Please try again.');
+            }
+        };
+        
+        loadImages();
     }, []);
 
     const handlePinPlaced = (position) => {

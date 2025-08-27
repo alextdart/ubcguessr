@@ -1,24 +1,17 @@
-import { MongoClient } from 'mongodb';
-
-const uri = process.env.MONGODB_URI;
-const client = new MongoClient(uri);
+import { gameAPI } from '../src/lib/supabase.js'
 
 export default async function handler(req, res) {
     if (req.method === 'GET') {
+        const { gameInstance = 'public', timeframe = 'all' } = req.query
+
         try {
-            await client.connect();
-            const database = client.db('leaderboard');
-            const collection = database.collection('scores');
-
-            const leaderboard = await collection.find().sort({ score: -1, date: 1 }).limit(30).toArray();
-
-            res.status(200).json(leaderboard);
+            const leaderboard = await gameAPI.getLeaderboard(gameInstance, timeframe, 30)
+            res.status(200).json(leaderboard)
         } catch (error) {
-            res.status(500).json({ error: 'Failed to fetch leaderboard' });
-        } finally {
-            await client.close();
+            console.error('Error fetching leaderboard:', error)
+            res.status(500).json({ error: 'Failed to fetch leaderboard' })
         }
     } else {
-        res.status(405).json({ error: 'Method not allowed' });
+        res.status(405).json({ error: 'Method not allowed' })
     }
 }

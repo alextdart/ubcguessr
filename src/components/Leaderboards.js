@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from "react";
+import { gameAPI } from "../lib/supabase";
 import "../styles.css";
 
 const Leaderboards = () => {
@@ -8,17 +9,23 @@ const Leaderboards = () => {
     const [weeklyLeaderboard, setWeeklyLeaderboard] = useState([]);
 
     useEffect(() => {
-        fetch('/api/getLeaderboard')
-            .then((response) => response.json())
-            .then((data) => setLeaderboard(data));
+        const loadLeaderboards = async () => {
+            try {
+                const [allTime, daily, weekly] = await Promise.all([
+                    gameAPI.getLeaderboard('public', 'all', 30),
+                    gameAPI.getLeaderboard('public', 'daily', 30),
+                    gameAPI.getLeaderboard('public', 'weekly', 30)
+                ]);
+                
+                setLeaderboard(allTime);
+                setDailyLeaderboard(daily);
+                setWeeklyLeaderboard(weekly);
+            } catch (error) {
+                console.error('Error loading leaderboards:', error);
+            }
+        };
 
-        fetch('/api/getDailyLeaderboard')
-            .then((response) => response.json())
-            .then((data) => setDailyLeaderboard(data));
-
-        fetch('/api/getWeeklyLeaderboard')
-            .then((response) => response.json())
-            .then((data) => setWeeklyLeaderboard(data));
+        loadLeaderboards();
     }, []);
 
     return (
