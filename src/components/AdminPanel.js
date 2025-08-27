@@ -23,17 +23,20 @@ const AdminPanel = () => {
     setLoading(true);
     setError('');
 
-    // In a real app, you'd hash this, but for simplicity we'll compare directly
-    const adminPassword = process.env.REACT_APP_ADMIN_PASSWORD || 'UBC2025Admin!'; // Fallback
+    const adminPassword = process.env.REACT_APP_ADMIN_PASSWORD;
     
-    console.log('Admin password from env:', adminPassword); // Debug log
-    console.log('All env vars:', process.env); // Debug all env vars
+    // If no password is configured, deny access
+    if (!adminPassword) {
+      setError('Admin access is not configured on this deployment.');
+      setLoading(false);
+      return;
+    }
     
     if (password === adminPassword) {
       setIsAuthenticated(true);
       sessionStorage.setItem('admin_authenticated', 'true');
     } else {
-      setError(`Invalid password. Expected: ${adminPassword}`); // Temporary debug
+      setError('Invalid password.');
     }
     
     setLoading(false);
