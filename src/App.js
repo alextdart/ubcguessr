@@ -6,6 +6,7 @@ import About from "./components/About";
 import FinalScore from "./components/FinalScore"; // Import the new component
 import Leaderboards from "./components/Leaderboards"; // Import the new component
 import ImageDifficultyAdmin from "./components/ImageDifficultyAdmin"; // Import the admin component
+import AdminPanel from "./components/AdminPanel"; // Import the main admin panel
 import Navbar from "./components/Navbar"; // Import the Navbar component
 import "./styles.css";
 import { Analytics } from "@vercel/analytics/react";
@@ -27,6 +28,7 @@ const App = () => {
                     <Route path="/leaderboards/orientation" element={<Leaderboards gameMode="orientation" />} />
                     <Route path="/leaderboards/classic" element={<Leaderboards gameMode="classic" />} />
                     <Route path="/leaderboards/challenge" element={<Leaderboards gameMode="challenge" />} />
+                    <Route path="/admin" element={<AdminPanel />} /> {/* Main admin panel */}
                     <Route path="/admin/image-difficulty" element={<ImageDifficultyAdmin />} /> {/* Hidden admin route */}
                 </Routes>
                 <Analytics />
