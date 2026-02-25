@@ -762,38 +762,72 @@ body {
   margin: 0 auto;
 }
 
-.orientation-button {
-  background: linear-gradient(135deg, #10b981, #059669);
-  font-size: 1.3em;
-  padding: 18px 40px;
-  margin-bottom: 20px;
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
-  transition: all 0.3s ease;
+.game-mode-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.orientation-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
-}
-
-.secondary-options {
-  text-align: center;
-}
-
-.classic-link {
-  background: transparent;
-  border: 2px solid #6b7280;
-  color: #6b7280;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 1em;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.classic-link:hover {
-  background: #6b7280;
+.game-mode-btn {
+  flex: 1;
+  min-width: 200px;
+  padding: 30px 20px;
+  font-size: 1.2em;
+  font-weight: bold;
   color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.game-mode-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.mode-title {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.mode-difficulty {
+  font-size: 0.8em;
+  opacity: 0.9;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.green-btn {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.green-btn:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+}
+
+.purple-btn {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.purple-btn:hover {
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+}
+
+.red-btn {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.red-btn:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
 }
 
 /* ===== NAVIGATION DROPDOWN STYLES ===== */

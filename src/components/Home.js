@@ -8,24 +8,34 @@ const Home = () => {
     return (
         <div className="home-page">
             <div className="orientation-banner">
-                <h1>UBC Orientation 2025</h1>
-                <h2>Welcome to UBC! Test your knowledge of campus landmarks</h2>
-                <p>Get familiar with your new home by exploring the most iconic locations on campus</p>
+                <h1>UBCguessr</h1>
+                <h2>Test your knowledge of UBC campus landmarks</h2>
+                <p>Choose your difficulty level and explore the most iconic locations on campus</p>
             </div>
             
-            <button 
-                onClick={() => navigate("/play/orientation")} 
-                className="start-button orientation-button"
-            >
-                Orientation Challenge
-            </button>
-            
-            <div className="secondary-options">
+            <div className="game-mode-buttons">
+                <button 
+                    onClick={() => navigate("/play/orientation")} 
+                    className="game-mode-btn green-btn"
+                >
+                    <div className="mode-title">Orientation</div>
+                    <div className="mode-difficulty">Easiest</div>
+                </button>
+                
                 <button 
                     onClick={() => navigate("/play/classic")} 
-                    className="classic-link"
+                    className="game-mode-btn purple-btn"
                 >
-                    Play Classic Game
+                    <div className="mode-title">Classic</div>
+                    <div className="mode-difficulty">Balanced</div>
+                </button>
+                
+                <button 
+                    onClick={() => navigate("/play/challenge")} 
+                    className="game-mode-btn red-btn"
+                >
+                    <div className="mode-title">Challenge</div>
+                    <div className="mode-difficulty">Difficult</div>
                 </button>
             </div>
         </div>

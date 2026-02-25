@@ -56,13 +56,19 @@ const Leaderboards = ({ gameMode = 'classic' }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {dailyLeaderboard.map((entry, index) => (
-                                <tr key={index}>
-                                    <td>{entry.score}</td>
-                                    <td>{entry.name}</td>
-                                    <td>{new Date(entry.date).toLocaleDateString()}</td>
+                            {dailyLeaderboard.length > 0 ? (
+                                dailyLeaderboard.map((entry, index) => (
+                                    <tr key={index}>
+                                        <td>{entry.score}</td>
+                                        <td>{entry.name}</td>
+                                        <td>{new Date(entry.date).toLocaleDateString()}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="3" style={{textAlign: 'center', fontStyle: 'italic', color: '#666'}}>No scores yet today</td>
                                 </tr>
-                            ))}
+                            )}
                         </tbody>
                     </table>
                 </div>
@@ -78,13 +84,19 @@ const Leaderboards = ({ gameMode = 'classic' }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {weeklyLeaderboard.map((entry, index) => (
-                                <tr key={index}>
-                                    <td>{entry.score}</td>
-                                    <td>{entry.name}</td>
-                                    <td>{new Date(entry.date).toLocaleDateString()}</td>
+                            {weeklyLeaderboard.length > 0 ? (
+                                weeklyLeaderboard.map((entry, index) => (
+                                    <tr key={index}>
+                                        <td>{entry.score}</td>
+                                        <td>{entry.name}</td>
+                                        <td>{new Date(entry.date).toLocaleDateString()}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="3" style={{textAlign: 'center', fontStyle: 'italic', color: '#666'}}>No scores yet this week</td>
                                 </tr>
-                            ))}
+                            )}
                         </tbody>
                     </table>
                 </div>
