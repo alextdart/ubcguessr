@@ -1,6 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { supabase, gameAPI } from "../lib/supabase";
 import "../styles.css";
+
+const difficultyLevels = [
+    { key: 'very_easy', label: 'Very Easy', color: '#22c55e', description: 'Iconic landmarks, impossible to miss' },
+    { key: 'easy', label: 'Easy', color: '#84cc16', description: 'Well-known buildings, clear landmarks' },
+    { key: 'normal', label: 'Normal', color: '#eab308', description: 'Recognizable with some campus knowledge' },
+    { key: 'hard', label: 'Hard', color: '#f97316', description: 'Requires good campus knowledge' },
+    { key: 'very_hard', label: 'Very Hard', color: '#ef4444', description: 'Obscure locations, expert level' }
+];
 
 const ImageDifficultyAdmin = () => {
     const [images, setImages] = useState([]);
@@ -9,19 +17,16 @@ const ImageDifficultyAdmin = () => {
     const [saving, setSaving] = useState(false);
     const [stats, setStats] = useState({});
 
-    const difficultyLevels = [
-        { key: 'very_easy', label: 'Very Easy', color: '#22c55e', description: 'Iconic landmarks, impossible to miss' },
-        { key: 'easy', label: 'Easy', color: '#84cc16', description: 'Well-known buildings, clear landmarks' },
-        { key: 'normal', label: 'Normal', color: '#eab308', description: 'Recognizable with some campus knowledge' },
-        { key: 'hard', label: 'Hard', color: '#f97316', description: 'Requires good campus knowledge' },
-        { key: 'very_hard', label: 'Very Hard', color: '#ef4444', description: 'Obscure locations, expert level' }
-    ];
-
-    useEffect(() => {
-        loadImages();
+    const calculateStats = useCallback((imageList) => {
+        const stats = {};
+        difficultyLevels.forEach(level => {
+            stats[level.key] = imageList.filter(img => img.difficulty_level === level.key).length;
+        });
+        stats.unassigned = imageList.filter(img => !img.difficulty_level || img.difficulty_level === 'normal').length;
+        setStats(stats);
     }, []);
 
-    const loadImages = async () => {
+    const loadImages = useCallback(async () => {
         try {
             setLoading(true);
             const { data, error } = await supabase
@@ -39,16 +44,11 @@ const ImageDifficultyAdmin = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [calculateStats]);
 
-    const calculateStats = (imageList) => {
-        const stats = {};
-        difficultyLevels.forEach(level => {
-            stats[level.key] = imageList.filter(img => img.difficulty_level === level.key).length;
-        });
-        stats.unassigned = imageList.filter(img => !img.difficulty_level || img.difficulty_level === 'normal').length;
-        setStats(stats);
-    };
+    useEffect(() => {
+        loadImages();
+    }, [loadImages]);
 
     const updateDifficulty = async (difficulty) => {
         if (!images[currentIndex]) return;

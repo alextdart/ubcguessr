@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../lib/supabase';
 
 const GameStats = () => {
@@ -14,11 +14,7 @@ const GameStats = () => {
   const [loading, setLoading] = useState(true);
   const [timeframe, setTimeframe] = useState('all');
 
-  useEffect(() => {
-    loadStats();
-  }, [timeframe]);
-
-  const loadStats = async () => {
+  const loadStats = useCallback(async () => {
     setLoading(true);
     try {
       // Get basic stats
@@ -99,7 +95,11 @@ const GameStats = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [timeframe]);
+
+  useEffect(() => {
+    loadStats();
+  }, [loadStats]);
 
   if (loading) {
     return <div className="admin-loading">Loading statistics...</div>;
