@@ -1,9 +1,34 @@
-# UBCguessr
+<p align="center">
+	<img src="public/logos/UBCguessr_logo_black_full.png" alt="UBCguessr logo" width="420" />
+</p>
 
-This is a UBC-campus based location guessing game inspired by Geoguessr and Timeguessr I made to practice JavaScript and learn React.
+<p align="center">
+	A campus location-guessing game inspired by GeoGuessr and built around UBC.
+</p>
 
-Try it out at [UBCguessr on Vercel](https://ubcguessr.vercel.app/).
+## About The Project
 
-## Created with Create React App
+UBCguessr is a web game where players identify real locations on the UBC campus from photos. Each round rewards guesses that are closer to the true coordinates, creating a fast and competitive experience that blends geography, memory, and strategy.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+I built this project to strengthen full-stack JavaScript skills while designing and shipping a polished, interactive product.
+
+## What The Game Includes
+
+- Multiple game modes, including orientation, classic, and challenge flows
+- Interactive map-based guessing with distance-based scoring
+- Leaderboards for comparing results across players and time windows
+- Admin tooling for image management and game content operations
+
+## Tech Stack
+
+- Frontend: React, React Router, Leaflet, React Leaflet, CSS
+- Backend and Data: Supabase, serverless API routes
+- Tooling and Deployment: Create React App, Vercel
+
+## Play The Game
+
+- Live site: https://ubcguessr.vercel.app/
+
+## Notes
+
+This repo is actively maintained as the game continues to evolve with new modes, balancing updates, and content improvements. Feel free to submit a PR if you wish.

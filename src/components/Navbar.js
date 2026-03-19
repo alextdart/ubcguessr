@@ -27,7 +27,9 @@ const Navbar = () => {
 
     return (
         <nav className="navbar">
-            <div className="logo">UBCguessr</div>
+            <Link to="/" className="logo" onClick={closeDropdowns}>
+                <img src="/logos/UBCguessr_logo_white_full.png" alt="UBCguessr" />
+            </Link>
             <div className={`nav-links ${menuOpen ? "active" : ""}`}>
                 <Link to="/" onClick={closeDropdowns}>Home</Link>
                 
