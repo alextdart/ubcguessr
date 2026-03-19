@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="public/logos/UBCguessr_logo_black_full.png" alt="UBCguessr logo" width="420" />
+	<img src="public/logos/UBCguessr_logo_white_full.png" alt="UBCguessr logo" width="420" />
 </p>
 
 <p align="center">
