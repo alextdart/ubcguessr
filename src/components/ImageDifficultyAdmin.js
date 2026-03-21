@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { Navigate } from "react-router-dom";
 import { supabase, gameAPI } from "../lib/supabase";
 import "../styles.css";
 
@@ -11,6 +12,7 @@ const difficultyLevels = [
 ];
 
 const ImageDifficultyAdmin = () => {
+    const [isAuthenticated] = useState(() => !!sessionStorage.getItem('admin_token'));
     const [images, setImages] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [loading, setLoading] = useState(true);
@@ -94,6 +96,10 @@ const ImageDifficultyAdmin = () => {
             setCurrentIndex(index);
         }
     };
+
+    if (!isAuthenticated) {
+        return <Navigate to="/admin" replace />;
+    }
 
     if (loading) {
         return (

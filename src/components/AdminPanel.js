@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ImageManager from './admin/ImageManager';
 import GameStats from './admin/GameStats';
 import '../styles.css';
@@ -9,11 +10,12 @@ const AdminPanel = () => {
   const [activeTab, setActiveTab] = useState('stats');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   // Check if already authenticated from sessionStorage
   useEffect(() => {
-    const authenticated = sessionStorage.getItem('admin_authenticated');
-    if (authenticated === 'true') {
+    const token = sessionStorage.getItem('admin_token');
+    if (token) {
       setIsAuthenticated(true);
     }
   }, []);
@@ -23,28 +25,31 @@ const AdminPanel = () => {
     setLoading(true);
     setError('');
 
-    const adminPassword = process.env.REACT_APP_ADMIN_PASSWORD;
-    
-    // If no password is configured, deny access
-    if (!adminPassword) {
-      setError('Admin access is not configured on this deployment.');
-      setLoading(false);
-      return;
+    try {
+      const response = await fetch('/api/adminLogin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIsAuthenticated(true);
+        sessionStorage.setItem('admin_token', data.token);
+      } else {
+        setError(data.error || 'Invalid password.');
+      }
+    } catch (err) {
+      setError('Failed to connect to server.');
     }
-    
-    if (password === adminPassword) {
-      setIsAuthenticated(true);
-      sessionStorage.setItem('admin_authenticated', 'true');
-    } else {
-      setError('Invalid password.');
-    }
-    
+
     setLoading(false);
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    sessionStorage.removeItem('admin_authenticated');
+    sessionStorage.removeItem('admin_token');
     setPassword('');
   };
 
@@ -115,7 +120,9 @@ const AdminPanel = () => {
         {activeTab === 'difficulty' && (
           <div>
             <p>Redirecting to difficulty assignment...</p>
-            {window.location.href = '/admin/image-difficulty'}
+            <button onClick={() => navigate('/admin/image-difficulty')} className="admin-login-button">
+              Go to Difficulty Assignment
+            </button>
           </div>
         )}
       </div>

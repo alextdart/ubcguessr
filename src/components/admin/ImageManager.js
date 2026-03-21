@@ -34,7 +34,6 @@ const ImageManager = () => {
 
       if (error) throw error;
       
-      console.log('Loaded images:', data); // Debug log
       setImages(data);
     } catch (error) {
       console.error('Error loading images:', error);
@@ -276,10 +275,6 @@ const ImageManager = () => {
                 alt={image.filename}
                 className="image-preview"
                 onError={(e) => {
-                  console.log('Image load error for:', image.filename);
-                  console.log('Attempted URL:', e.target.src);
-                  console.log('Full image data:', image);
-                  console.log('Supabase URL:', process.env.REACT_APP_SUPABASE_URL);
                   e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOTk5Ij5JbWFnZSBub3QgZm91bmQ8L3RleHQ+PC9zdmc+';
                 }}
               />
