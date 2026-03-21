@@ -18,18 +18,24 @@ const GameStats = () => {
     setLoading(true);
     try {
       // Get basic stats
-      const { data: allScores } = await supabase
+      const { data: allScores, error } = await supabase
         .from('scores')
         .select(`
-          *,
+          player_name,
+          total_score,
+          submitted_at,
           game_instances(name, display_name)
         `)
-        .order('created_at', { ascending: false });
+        .order('submitted_at', { ascending: false });
+
+      if (error) throw error;
+
+      const safeScores = allScores || [];
 
       // Filter by timeframe
       const now = new Date();
-      const filteredScores = allScores.filter(score => {
-        const scoreDate = new Date(score.created_at);
+      const filteredScores = safeScores.filter(score => {
+        const scoreDate = new Date(score.submitted_at);
         switch (timeframe) {
           case 'today':
             return scoreDate.toDateString() === now.toDateString();
@@ -71,8 +77,8 @@ const GameStats = () => {
       for (let i = 6; i >= 0; i--) {
         const date = new Date(now.getTime() - i * 24 * 60 * 60 * 1000);
         const dateStr = date.toISOString().split('T')[0];
-        const dayGames = allScores.filter(score => 
-          score.created_at.startsWith(dateStr)
+        const dayGames = safeScores.filter(score => 
+          score.submitted_at?.startsWith(dateStr)
         ).length;
         dailyGames.push({
           date: date.toLocaleDateString(),
@@ -189,7 +195,7 @@ const GameStats = () => {
                   <td>{game.player_name}</td>
                   <td>{game.total_score}</td>
                   <td>{game.game_instances?.display_name || 'Unknown'}</td>
-                  <td>{new Date(game.created_at).toLocaleDateString()}</td>
+                  <td>{new Date(game.submitted_at).toLocaleDateString()}</td>
                 </tr>
               ))}
             </tbody>

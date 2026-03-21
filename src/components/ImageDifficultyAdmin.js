@@ -24,7 +24,7 @@ const ImageDifficultyAdmin = () => {
         difficultyLevels.forEach(level => {
             stats[level.key] = imageList.filter(img => img.difficulty_level === level.key).length;
         });
-        stats.unassigned = imageList.filter(img => !img.difficulty_level || img.difficulty_level === 'normal').length;
+        stats.unassigned = imageList.filter(img => !img.difficulty_level).length;
         setStats(stats);
     }, []);
 
